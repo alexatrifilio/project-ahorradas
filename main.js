@@ -36,7 +36,6 @@ listContainer.appendChild(navList);
 
 
 const navItemCreator = (iconText, itemText, url) => {
-    console.log('hola mundo');
     const listItem = document.createElement('li');
     listItem.setAttribute('class', 'nav-item');
     const link = document.createElement('a');
@@ -63,3 +62,5 @@ const navItemCreator = (iconText, itemText, url) => {
 navItemCreator('insights', 'Balance', '#');
 navItemCreator('sell', 'Categorías', '#');
 navItemCreator('pie_chart', 'Reportes', '#');
+
+
