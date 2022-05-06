@@ -60,19 +60,6 @@ const navItemCreator = (iconText, itemText, url) => {
     navList.appendChild(listItem);
 }
 
-
-// const bttnCreator = (iconText, bttnText) => {
-//     const bttn = document.createElement('div');
-//     bttn.setAttribute('class', 'mx-3');
-//     const bttnIcon = document.createElement('span');
-//     bttnIcon.setAttribute('class', 'material-symbols-outlined');
-//     bttnIcon.appendChild(document.createTextNode(iconText));
-//     bttn.appendChild(bttnIcon);
-//     const bttnName = document.createTextNode(bttnText);
-//     bttn.appendChild(bttnName);
-//     bttnContainer.appendChild(bttn);
-// }
-
 navItemCreator('insights', 'Balance', '#');
 navItemCreator('sell', 'Categorías', '#');
 navItemCreator('pie_chart', 'Reportes', '#');
