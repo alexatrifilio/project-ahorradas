@@ -1,0 +1,11 @@
+.navbar-nav{
+    flex-direction: row;
+}
+
+.list-nav{
+    align-items: center;
+}
+
+.material-symbols-outlined.brand{
+    font-size: 40px;
+}
