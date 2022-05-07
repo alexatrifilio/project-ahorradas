@@ -79,7 +79,7 @@ const cardCreator = (cardTitle, cardAppend) =>{
     const card = document.createElement('div');
     card.setAttribute('class','card');
     card.setAttribute('id', cardTitle);
-    card.classList.add('mb-4');
+    card.classList.add('mb-4', 'p-4');
     const cTitle = document.createElement('h2');
     const cardTitleText = document.createTextNode(cardTitle)
     cTitle.appendChild(cardTitleText);

@@ -21,7 +21,7 @@ const balanceCard = document.getElementById('Balance');
 const balance = {
     ganancias: 5,
     gastos: 8,
-    total: function () {this.ganancias + this.gastos}
+    total: function () {return this.ganancias + this.gastos}
 }
 const balanceTbCreator = (balance)=>{
     let table = document.createElement('table');
@@ -38,9 +38,18 @@ const balanceTbCreator = (balance)=>{
         let cell = document.createElement('td');
         let textNode = document.createTextNode(prop);
         cell.appendChild(textNode);
-        let textVNode = document.createTextNode(balance[prop]);
-        cell.appendChild(textVNode);
+        let cell2 = document.createElement('td');
+        if (prop === 'total'){
+            console.log(balance.total());
+            let textVNode = document.createTextNode(`$ ${balance.total()}`)
+            cell2.appendChild(textVNode);
+        }else{
+            let textVNode = document.createTextNode(`$ ${balance[prop]}`);
+            cell2.setAttribute('class', `val-${prop}`);
+            cell2.appendChild(textVNode);
+        }
         row.appendChild(cell)
+        row.appendChild(cell2)
         tBody.appendChild(row)
         
     }
@@ -50,18 +59,18 @@ const balanceTbCreator = (balance)=>{
 balanceTbCreator(balance);
 
 
-// Tabla //
-
-
-
 //--- Card Operaciones ---//
 
 cardCreator('Operaciones', col2);
 const operacionesCard = document.getElementById('Operaciones');
-const newOpBttn = document.createElement('button');
-newOpBttn.setAttribute('type', 'button');
+const newOpBttn = document.createElement('a');
+newOpBttn.setAttribute('href', '#');
 newOpBttn.setAttribute('class', 'btn');
+newOpBttn.classList.add('btn-info', 'text-white', 'op-btn');
+const opBttnText = document.createTextNode('+ Nueva operación');
+newOpBttn.appendChild(opBttnText);
 operacionesCard.appendChild(newOpBttn);
+
 
 
 

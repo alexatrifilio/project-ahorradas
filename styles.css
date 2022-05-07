@@ -1,3 +1,4 @@
+/***** HEADER *****/
 .navbar-nav{
     flex-direction: row;
 }
@@ -8,4 +9,19 @@
 
 .material-symbols-outlined.brand{
     font-size: 40px;
+}
+
+
+/***** BALANCE CARD *****/
+.val-ganancias{
+    color: green;
+}
+
+.val-gastos{
+    color: red;
+}
+
+/***** OPERACIONES CARD *****/
+.op-btn{
+    width: 180px;
 }
