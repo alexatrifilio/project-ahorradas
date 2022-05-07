@@ -1,7 +1,7 @@
 const body = document.body
 
 
-// ***** HEADER **** //
+// ***** HEADER ***** //
 
 const header = document.createElement('header');
 header.setAttribute('class', 'bg-info');
@@ -24,7 +24,7 @@ navBar.appendChild(brand);
 header.appendChild(navBar)
 body.appendChild(header)
 
-     // ** Botones Header ** //
+     // ** Header Buttons ** //
 
 const listContainer = document.createElement('div');
 listContainer.setAttribute('class', 'd-flex');
@@ -63,4 +63,49 @@ navItemCreator('insights', 'Balance', '#');
 navItemCreator('sell', 'Categorías', '#');
 navItemCreator('pie_chart', 'Reportes', '#');
 
+const main = document.createElement('main');
+body.appendChild(main);
 
+
+// ***** Functions ***** //
+
+// ** Card Creator Function ** //
+
+const cardCreator = (cardTitle) =>{
+    const card = document.createElement('div');
+    card.setAttribute('class','card');
+    const cTitle = document.createElement('h2');
+    const cardTitleText = document.createTextNode(cardTitle)
+    cTitle.appendChild(cardTitleText);
+    card.appendChild(cTitle);
+    main.appendChild(card);
+}
+
+// ** Table Creator Function ** //
+
+const TableCreator = (qtr, qtd) =>{
+    const table = document.createElement('table');
+    const tBody =document.createElement('tbody');
+    table.appendChild(tBody);
+
+    for (let i = 0; i < qtr; i++){
+
+        const tr = document.createElement('tr');
+        tBody.appendChild(tr)
+
+        if (i = 0){
+            for (let j = 0; j < qtd; j++){
+                const th = document.createElement('th');
+                tr.appendChild(th);
+            }
+        }
+        else {
+            for (let j = 0; j < qtd; j++){
+                const td = document.createElement('td');
+                tr.appendChild(td);
+            }
+        }
+    }
+}
+
+TableCreator(3,3)
