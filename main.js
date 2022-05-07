@@ -5,7 +5,7 @@ const body = document.body
 
 const header = document.createElement('header');
 header.setAttribute('class', 'bg-info');
-header.classList.add('bg-gradient', 'text-white', 'd-flex', 'justify-content-between', 'p-2');
+header.classList.add('bg-gradient', 'text-white', 'd-flex', 'justify-content-between', 'px-5', 'py-2');
 const navBar = document.createElement('nav');
 navBar.setAttribute('class', 'navbar');
 const brand = document.createElement('a');
@@ -67,6 +67,7 @@ const main = document.createElement('main');
 body.appendChild(main);
 const mainContainer = document.createElement('div');
 mainContainer.setAttribute('class', 'container');
+mainContainer.classList.add('pt-5');
 main.appendChild(mainContainer);
 
 
@@ -74,15 +75,16 @@ main.appendChild(mainContainer);
 
 // ** Card Creator Function ** //
 
-const cardCreator = (cardTitle) =>{
+const cardCreator = (cardTitle, cardAppend) =>{
     const card = document.createElement('div');
     card.setAttribute('class','card');
-    card.setAttribute('id', cardTitle)
+    card.setAttribute('id', cardTitle);
+    card.classList.add('mb-4');
     const cTitle = document.createElement('h2');
     const cardTitleText = document.createTextNode(cardTitle)
     cTitle.appendChild(cardTitleText);
     card.appendChild(cTitle);
-    mainContainer.appendChild(card);
+    cardAppend.appendChild(card);
 }
 
 // ** Table Creator Function ** //

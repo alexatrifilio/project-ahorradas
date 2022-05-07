@@ -1,9 +1,21 @@
-// Balance //
+// -- LAYOUT -- //
+    // - row - //
+const row = document.createElement('div');
+row.setAttribute('class', 'row');
+row.classList.add('row-cols-2');
 
+    // - cols - //
+const col1 = document.createElement('div');
+col1.setAttribute('class', 'col-4');
+const col2 = document.createElement('div');
+col2.setAttribute('class', 'col-8');
+row.appendChild(col1);
+row.appendChild(col2);
+mainContainer.appendChild(row);
 
 //--- Card Balance ---//
 
-cardCreator('Balance');
+cardCreator('Balance', col1);
 // TableCreator(0,3,2);
 const balanceCard = document.getElementById('Balance');
 const balance = {
@@ -44,13 +56,15 @@ balanceTbCreator(balance);
 
 //--- Card Operaciones ---//
 
-cardCreator('Operaciones');
+cardCreator('Operaciones', col2);
 const operacionesCard = document.getElementById('Operaciones');
 const newOpBttn = document.createElement('button');
+newOpBttn.setAttribute('type', 'button');
+newOpBttn.setAttribute('class', 'btn');
 operacionesCard.appendChild(newOpBttn);
 
 
 
 //--- Card Filtros ---//
 
-cardCreator('Filtros');
+cardCreator('Filtros', col1);
