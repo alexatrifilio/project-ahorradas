@@ -77,6 +77,7 @@ main.appendChild(mainContainer);
 const cardCreator = (cardTitle) =>{
     const card = document.createElement('div');
     card.setAttribute('class','card');
+    card.setAttribute('id', cardTitle)
     const cTitle = document.createElement('h2');
     const cardTitleText = document.createTextNode(cardTitle)
     cTitle.appendChild(cardTitleText);
@@ -88,6 +89,8 @@ const cardCreator = (cardTitle) =>{
 
 const TableCreator = (qth, qtr, qtd) =>{
     const table = document.createElement('table');
+    table.setAttribute('class', 'table');
+    table.classList.add('table-borderless');
     const thead = document.createElement('thead');
     table.appendChild(thead);
     const trh = document.createElement('tr');
@@ -98,7 +101,7 @@ const TableCreator = (qth, qtr, qtd) =>{
         trh.appendChild(th);
     }
     
-    const tBody =document.createElement('tbody');
+    const tBody = document.createElement('tbody');
     table.appendChild(tBody);
 
     for (let i = 0; i < qtr; i++){
@@ -115,5 +118,3 @@ const TableCreator = (qth, qtr, qtd) =>{
 
     main.appendChild(table);
 }
-
-TableCreator(3,3,3)
