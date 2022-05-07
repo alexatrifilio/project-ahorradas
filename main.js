@@ -65,6 +65,9 @@ navItemCreator('pie_chart', 'Reportes', '#');
 
 const main = document.createElement('main');
 body.appendChild(main);
+const mainContainer = document.createElement('div');
+mainContainer.setAttribute('class', 'container');
+main.appendChild(mainContainer);
 
 
 // ***** Functions ***** //
@@ -78,13 +81,23 @@ const cardCreator = (cardTitle) =>{
     const cardTitleText = document.createTextNode(cardTitle)
     cTitle.appendChild(cardTitleText);
     card.appendChild(cTitle);
-    main.appendChild(card);
+    mainContainer.appendChild(card);
 }
 
 // ** Table Creator Function ** //
 
-const TableCreator = (qtr, qtd) =>{
+const TableCreator = (qth, qtr, qtd) =>{
     const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    table.appendChild(thead);
+    const trh = document.createElement('tr');
+    thead.appendChild(trh)
+   
+    for (let i = 0; i < qth; i++){
+        const th = document.createElement('th');
+        trh.appendChild(th);
+    }
+    
     const tBody =document.createElement('tbody');
     table.appendChild(tBody);
 
@@ -92,20 +105,15 @@ const TableCreator = (qtr, qtd) =>{
 
         const tr = document.createElement('tr');
         tBody.appendChild(tr)
-
-        if (i = 0){
-            for (let j = 0; j < qtd; j++){
-                const th = document.createElement('th');
-                tr.appendChild(th);
-            }
-        }
-        else {
-            for (let j = 0; j < qtd; j++){
+     
+            for (let k = 0; k < qtd; k++){
                 const td = document.createElement('td');
                 tr.appendChild(td);
             }
-        }
+
     }
+
+    main.appendChild(table);
 }
 
-TableCreator(3,3)
+TableCreator(3,3,3)
