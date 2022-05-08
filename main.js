@@ -60,7 +60,7 @@ const navItemCreator = (iconText, itemText, url) => {
     navList.appendChild(listItem);
 }
 
-navItemCreator('insights', 'Balance', '#');
+navItemCreator('insights', 'Balance', './index.html');
 navItemCreator('sell', 'Categorías', '#');
 navItemCreator('pie_chart', 'Reportes', '#');
 
@@ -70,6 +70,8 @@ const mainContainer = document.createElement('div');
 mainContainer.setAttribute('class', 'container');
 mainContainer.classList.add('pt-5');
 main.appendChild(mainContainer);
+
+const categorias = ['Comida', 'Servicios','Trabajo', 'Salidas', 'Educación', 'Transporte'];
 
 
 // ***** Functions ***** //
@@ -81,7 +83,7 @@ const cardCreator = (cardTitle, cardAppend) =>{
     let intCardTitle = cardTitle.toLowerCase();
     card.setAttribute('class','card');
     card.setAttribute('id', intCardTitle);
-    card.classList.add('mb-4', 'p-4');
+    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded');
     const firstCardRow = document.createElement('div');
     firstCardRow.setAttribute('class', 'd-flex');
     firstCardRow.setAttribute('id', `${intCardTitle}-first-row`);
@@ -125,4 +127,48 @@ const TableCreator = (qth, qtr, qtd) =>{
     }
 
     main.appendChild(table);
+}
+
+
+// ** Form Creator ** //
+
+const formCreator = (inputName, inputType, formAppend, selectOpt) => {
+    const form = document.createElement('form');
+    
+    for (const index in inputName){
+        const formItemCont = document.createElement('div');
+        formItemCont.classList.add('d-flex', 'flex-column');
+        const label = document.createElement('label');
+        label.setAttribute('for', `is-${inputName[index]}`);
+        label.appendChild(document.createTextNode(inputName[index]));
+        label.classList.add('mb-2');
+        if(inputType[index] === 'select'){
+            const select = document.createElement('select');
+            select.classList.add('mb-2');
+            for (let index in selectOpt){
+                for (elem of selectOpt[index]){
+                    const option = document.createElement('option');
+                    option.appendChild(document.createTextNode(elem));
+                    select.appendChild(option);
+                }
+            }
+            formItemCont.appendChild(label);
+            formItemCont.appendChild(select);
+
+        } else{
+
+            const input = document.createElement('input');
+            input.classList.add('mb-2')
+            input.setAttribute('id', `is-${inputName[index]}`);
+            input.setAttribute('type', inputType[index]);
+            formItemCont.appendChild(label);
+            formItemCont.appendChild(input);
+        }
+        form.appendChild(formItemCont);         
+    }
+    // for (let elem of inputType){
+    //     input.setAttribute('type', elem)
+    // }
+
+    formAppend.appendChild(form);
 }

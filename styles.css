@@ -1,3 +1,9 @@
+/***** GENERAL *****/
+
+a{
+    text-decoration: none;
+}
+
 /***** HEADER *****/
 .navbar-nav{
     flex-direction: row;
