@@ -8,7 +8,7 @@
 }
 
 .material-symbols-outlined.brand{
-    font-size: 40px;
+    font-size: 45px;
 }
 
 
@@ -24,4 +24,8 @@
 /***** OPERACIONES CARD *****/
 .op-btn{
     width: 180px;
+}
+
+.op-img{
+    max-width: 450px
 }

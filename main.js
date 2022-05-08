@@ -17,6 +17,7 @@ hIcon.setAttribute('class', 'material-symbols-outlined');
 hIcon.classList.add('brand')
 hIcon.appendChild(document.createTextNode('savings'));
 const brandName = document.createElement('h1');
+brandName.classList.add('ms-3');
 brand.appendChild(hIcon);
 brandName.appendChild(document.createTextNode('AhorrADAs'));
 brand.appendChild(brandName);
