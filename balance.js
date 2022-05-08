@@ -17,7 +17,7 @@ mainContainer.appendChild(row);
 
 cardCreator('Balance', col1);
 // TableCreator(0,3,2);
-const balanceCard = document.getElementById('Balance');
+const balanceCard = document.getElementById('balance');
 const balance = {
     ganancias: 5,
     gastos: 8,
@@ -62,14 +62,16 @@ balanceTbCreator(balance);
 //--- Card Operaciones ---//
 
 cardCreator('Operaciones', col2);
-const operacionesCard = document.getElementById('Operaciones');
+const operacionesCard = document.getElementById('operaciones');
+const opFirstRow = document.getElementById('operaciones-first-row');
+opFirstRow.classList.add('justify-content-between');
 const newOpBttn = document.createElement('a');
 newOpBttn.setAttribute('href', '#');
 newOpBttn.setAttribute('class', 'btn');
 newOpBttn.classList.add('btn-info', 'text-white', 'op-btn');
 const opBttnText = document.createTextNode('+ Nueva operación');
 newOpBttn.appendChild(opBttnText);
-operacionesCard.appendChild(newOpBttn);
+opFirstRow.appendChild(newOpBttn);
 
 
 

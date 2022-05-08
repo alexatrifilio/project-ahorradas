@@ -77,13 +77,18 @@ main.appendChild(mainContainer);
 
 const cardCreator = (cardTitle, cardAppend) =>{
     const card = document.createElement('div');
+    let intCardTitle = cardTitle.toLowerCase();
     card.setAttribute('class','card');
-    card.setAttribute('id', cardTitle);
+    card.setAttribute('id', intCardTitle);
     card.classList.add('mb-4', 'p-4');
+    const firstCardRow = document.createElement('div');
+    firstCardRow.setAttribute('class', 'd-flex');
+    firstCardRow.setAttribute('id', `${intCardTitle}-first-row`);
     const cTitle = document.createElement('h2');
-    const cardTitleText = document.createTextNode(cardTitle)
+    const cardTitleText = document.createTextNode(cardTitle);
     cTitle.appendChild(cardTitleText);
-    card.appendChild(cTitle);
+    firstCardRow.appendChild(cTitle);
+    card.appendChild(firstCardRow);
     cardAppend.appendChild(card);
 }
 
