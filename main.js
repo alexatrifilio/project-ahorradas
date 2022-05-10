@@ -1,11 +1,11 @@
 const body = document.body
 
 
-// ***** HEADER **** //
+// ***** HEADER ***** //
 
 const header = document.createElement('header');
 header.setAttribute('class', 'bg-info');
-header.classList.add('bg-gradient', 'text-white', 'd-flex', 'justify-content-between', 'p-2');
+header.classList.add('bg-gradient', 'text-white', 'd-flex', 'justify-content-between', 'px-5', 'py-2');
 const navBar = document.createElement('nav');
 navBar.setAttribute('class', 'navbar');
 const brand = document.createElement('a');
@@ -17,6 +17,7 @@ hIcon.setAttribute('class', 'material-symbols-outlined');
 hIcon.classList.add('brand')
 hIcon.appendChild(document.createTextNode('savings'));
 const brandName = document.createElement('h1');
+brandName.classList.add('ms-3');
 brand.appendChild(hIcon);
 brandName.appendChild(document.createTextNode('AhorrADAs'));
 brand.appendChild(brandName);
@@ -24,7 +25,7 @@ navBar.appendChild(brand);
 header.appendChild(navBar)
 body.appendChild(header)
 
-     // ** Botones Header ** //
+     // ** Header Buttons ** //
 
 const listContainer = document.createElement('div');
 listContainer.setAttribute('class', 'd-flex');
@@ -59,8 +60,113 @@ const navItemCreator = (iconText, itemText, url) => {
     navList.appendChild(listItem);
 }
 
-navItemCreator('insights', 'Balance', '#');
+navItemCreator('insights', 'Balance', './index.html');
 navItemCreator('sell', 'Categorías', '#');
 navItemCreator('pie_chart', 'Reportes', '#');
 
+const main = document.createElement('main');
+body.appendChild(main);
+const mainContainer = document.createElement('div');
+mainContainer.setAttribute('class', 'container');
+mainContainer.classList.add('pt-5');
+main.appendChild(mainContainer);
 
+const categorias = ['Comida', 'Servicios','Trabajo', 'Salidas', 'Educación', 'Transporte'];
+
+
+// ***** Functions ***** //
+
+// ** Card Creator Function ** //
+
+const cardCreator = (cardTitle, cardAppend) =>{
+    const card = document.createElement('div');
+    let intCardTitle = cardTitle.toLowerCase();
+    card.setAttribute('class','card');
+    card.setAttribute('id', intCardTitle);
+    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded');
+    const firstCardRow = document.createElement('div');
+    firstCardRow.setAttribute('class', 'd-flex');
+    firstCardRow.setAttribute('id', `${intCardTitle}-first-row`);
+    const cTitle = document.createElement('h2');
+    const cardTitleText = document.createTextNode(cardTitle);
+    cTitle.appendChild(cardTitleText);
+    firstCardRow.appendChild(cTitle);
+    card.appendChild(firstCardRow);
+    cardAppend.appendChild(card);
+}
+
+// ** Table Creator Function ** //
+
+// Hasta ahora no la usé porque no supe como ingresarle datos a la table. - Ale
+const TableCreator = (qth, qtr, qtd) =>{
+    const table = document.createElement('table');
+    table.setAttribute('class', 'table');
+    table.classList.add('table-borderless');
+    const thead = document.createElement('thead');
+    table.appendChild(thead);
+    const trh = document.createElement('tr');
+    thead.appendChild(trh)
+   
+    for (let i = 0; i < qth; i++){
+        const th = document.createElement('th');
+        trh.appendChild(th);
+    }
+    
+    const tBody = document.createElement('tbody');
+    table.appendChild(tBody);
+
+    for (let i = 0; i < qtr; i++){
+
+        const tr = document.createElement('tr');
+        tBody.appendChild(tr)
+     
+            for (let k = 0; k < qtd; k++){
+                const td = document.createElement('td');
+                tr.appendChild(td);
+            }
+
+    }
+
+    main.appendChild(table);
+}
+
+
+// ** Form Creator ** //
+
+const formCreator = (inputName, inputType, formAppend, selectOpt) => {
+    const form = document.createElement('form');
+    
+    for (const index in inputName){
+        const formItemCont = document.createElement('div');
+        formItemCont.classList.add('d-flex', 'flex-column');
+        const label = document.createElement('label');
+        label.setAttribute('for', `is-${inputName[index]}`);
+        label.appendChild(document.createTextNode(inputName[index]));
+        label.classList.add('mb-2');
+        if(inputType[index] === 'select'){
+            const select = document.createElement('select');
+            select.classList.add('mb-2');
+            for (let index in selectOpt){                  // Este loop está incluyendo TODAS las opciones dentro de todas las categorias en lugar de agregar cada una a un select. Los array que mandan la info estan en balance.js en la seccion de Card Filtros - Filtros form 
+                for (elem of selectOpt[index]){
+                    const option = document.createElement('option');
+                    option.appendChild(document.createTextNode(elem));
+                    select.appendChild(option);
+                }
+            }
+            formItemCont.appendChild(label);
+            formItemCont.appendChild(select);
+
+        } else{
+
+            const input = document.createElement('input');
+            input.classList.add('mb-2')
+            input.setAttribute('id', `is-${inputName[index]}`);
+            input.setAttribute('type', inputType[index]);
+            formItemCont.appendChild(label);
+            formItemCont.appendChild(input);
+        }
+        form.appendChild(formItemCont);         
+    }
+
+    formAppend.appendChild(form);
+}
