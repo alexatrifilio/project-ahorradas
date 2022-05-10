@@ -97,6 +97,7 @@ const cardCreator = (cardTitle, cardAppend) =>{
 
 // ** Table Creator Function ** //
 
+// Hasta ahora no la usé porque no supe como ingresarle datos a la table. - Ale
 const TableCreator = (qth, qtr, qtd) =>{
     const table = document.createElement('table');
     table.setAttribute('class', 'table');
@@ -145,7 +146,7 @@ const formCreator = (inputName, inputType, formAppend, selectOpt) => {
         if(inputType[index] === 'select'){
             const select = document.createElement('select');
             select.classList.add('mb-2');
-            for (let index in selectOpt){
+            for (let index in selectOpt){                  // Este loop está incluyendo TODAS las opciones dentro de todas las categorias en lugar de agregar cada una a un select. Los array que mandan la info estan en balance.js en la seccion de Card Filtros - Filtros form 
                 for (elem of selectOpt[index]){
                     const option = document.createElement('option');
                     option.appendChild(document.createTextNode(elem));
@@ -166,9 +167,6 @@ const formCreator = (inputName, inputType, formAppend, selectOpt) => {
         }
         form.appendChild(formItemCont);         
     }
-    // for (let elem of inputType){
-    //     input.setAttribute('type', elem)
-    // }
 
     formAppend.appendChild(form);
 }
