@@ -98,36 +98,43 @@ const cardCreator = (cardTitle, cardAppend) =>{
 // ** Table Creator Function ** //
 
 // Hasta ahora no la usé porque no supe como ingresarle datos a la table. - Ale
-const TableCreator = (qth, qtr, qtd) =>{
+const createTable = (tableName, columnNames, cardId) =>{
+    
     const table = document.createElement('table');
     table.setAttribute('class', 'table');
+    table.setAttribute('id', tableName);
     table.classList.add('table-borderless');
-    const thead = document.createElement('thead');
-    table.appendChild(thead);
-    const trh = document.createElement('tr');
-    thead.appendChild(trh)
-   
-    for (let i = 0; i < qth; i++){
-        const th = document.createElement('th');
-        trh.appendChild(th);
-    }
-    
-    const tBody = document.createElement('tbody');
-    table.appendChild(tBody);
+    // const colgroup = document.createElement('colgroup');
+    // table.appendChild(colgroup);
+    const tr = document.createElement('tr');
+    table.appendChild(tr);
+    var card = document.getElementById(cardId);
+    card.appendChild(table)
 
-    for (let i = 0; i < qtr; i++){
+    columnNames.forEach(function(object) {
+        // const col = document.createElement('col');
+        // col.setAttribute('id', object);
+        var th = document.createElement('th');
+        th.setAttribute('id', object)
+        th.appendChild(document.createTextNode(object));
+        tr.appendChild(th);
+        // colgroup.appendChild(col);
+        console.log(object);
+    });
 
-        const tr = document.createElement('tr');
-        tBody.appendChild(tr)
-     
-            for (let k = 0; k < qtd; k++){
-                const td = document.createElement('td');
-                tr.appendChild(td);
-            }
+}
 
-    }
-
-    main.appendChild(table);
+function appendData(data, tableName){
+    var table = document.getElementById(tableName);
+    data.forEach(function(object) {
+        var tr = document.createElement('tr');
+        table.appendChild(tr);
+        for(i in object){
+            var td = document.createElement('td');
+            td.appendChild(document.createTextNode(object[i]));
+            tr.appendChild(td);
+        }
+    });
 }
 
 
