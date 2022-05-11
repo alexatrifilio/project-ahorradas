@@ -61,8 +61,8 @@ const navItemCreator = (iconText, itemText, url) => {
 }
 
 navItemCreator('insights', 'Balance', './index.html');
-navItemCreator('sell', 'Categorías', '#');
-navItemCreator('pie_chart', 'Reportes', '#');
+navItemCreator('sell', 'Categorías', './categorias.html');
+navItemCreator('pie_chart', 'Reportes', './reportes.html');
 
 const main = document.createElement('main');
 body.appendChild(main);
