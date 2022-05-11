@@ -55,49 +55,6 @@ const balanceTbCreator = (balance)=>{
 
 balanceTbCreator(balance);
 
-
-//--- Card Operaciones ---//
-
-cardCreator('Operaciones', col2);
-const operacionesCard = document.getElementById('operaciones');
-const opFirstRow = document.getElementById('operaciones-first-row');
-opFirstRow.classList.add('justify-content-between');
-
-    // -- Objeto operaciones (Array) --//
-
-const operaciones =[];
-
-    // -- Botón Nueva Operación -- // 
-
-const newOpBttn = document.createElement('a');
-newOpBttn.setAttribute('href', './nueva-operacion.html');
-newOpBttn.setAttribute('class', 'btn');
-newOpBttn.classList.add('btn-info', 'text-white', 'op-btn');
-const opBttnText = document.createTextNode('+ Nueva operación');
-newOpBttn.appendChild(opBttnText);
-opFirstRow.appendChild(newOpBttn);
-
-    // -- opCard SIN operaciones -- //
-
-if (operaciones.length === 0){
-    const opImg = document.createElement('img');
-    const opImgCont = document.createElement('div');
-    opImgCont.classList.add('d-flex', 'align-items-center', 'flex-column');
-    opImg.setAttribute('src', './assets/savings.png');
-    opImg.classList.add('op-img');
-    const opSubtitle = document.createElement('h3');
-    opSubtitle.appendChild(document.createTextNode('Sin resultados'));
-    const opParagraph = document.createElement('p');
-    opParagraph.appendChild(document.createTextNode('Cambia los filtros o agrega operaciones.'))
-    opImgCont.appendChild(opImg);
-    opImgCont.appendChild(opSubtitle);
-    opImgCont.appendChild(opParagraph);
-    operacionesCard.appendChild(opImgCont);
-}
-
-    // -- opCard CON operaciones -- //
-
-
 //--- Card Filtros ---//
 
 cardCreator('Filtros', col1);
