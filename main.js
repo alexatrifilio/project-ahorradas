@@ -104,10 +104,10 @@ const createTable = (tableName, columnNames, cardId) =>{
     table.setAttribute('class', 'table');
     table.setAttribute('id', tableName);
     table.classList.add('table-borderless');
-    // const colgroup = document.createElement('colgroup');
-    // table.appendChild(colgroup);
+    const thead = document.createElement('thead');
     const tr = document.createElement('tr');
-    table.appendChild(tr);
+    thead.appendChild(tr);
+    table.appendChild(thead);
     var card = document.getElementById(cardId);
     card.appendChild(table)
 
@@ -122,13 +122,17 @@ const createTable = (tableName, columnNames, cardId) =>{
         console.log(object);
     });
 
+    const tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+
 }
 
 function appendData(data, tableName){
     var table = document.getElementById(tableName);
+    let tbody = table.querySelector('tbody')
     data.forEach(function(object) {
         var tr = document.createElement('tr');
-        table.appendChild(tr);
+        tbody.appendChild(tr);
         for(i in object){
             var td = document.createElement('td');
             td.appendChild(document.createTextNode(object[i]));
