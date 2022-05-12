@@ -100,36 +100,32 @@ const cardCreator = (cardTitle, cardAppend) =>{
 // Hasta ahora no la usé porque no supe como ingresarle datos a la table. - Ale
 const createTable = (tableName, columnNames, cardId) =>{
     
+    const card = document.getElementById(cardId);
     const table = document.createElement('table');
+    const tr = document.createElement('tr');
+    
     table.setAttribute('class', 'table');
     table.setAttribute('id', tableName);
     table.classList.add('table-borderless');
-    // const colgroup = document.createElement('colgroup');
-    // table.appendChild(colgroup);
-    const tr = document.createElement('tr');
     table.appendChild(tr);
-    var card = document.getElementById(cardId);
     card.appendChild(table)
 
     columnNames.forEach(function(object) {
-        // const col = document.createElement('col');
-        // col.setAttribute('id', object);
         var th = document.createElement('th');
         th.setAttribute('id', object)
         th.appendChild(document.createTextNode(object));
         tr.appendChild(th);
-        // colgroup.appendChild(col);
-        console.log(object);
     });
 
 }
 
 function appendData(data, tableName){
     var table = document.getElementById(tableName);
+
     data.forEach(function(object) {
         var tr = document.createElement('tr');
         table.appendChild(tr);
-        for(i in object){
+        for(let i in object){
             var td = document.createElement('td');
             td.appendChild(document.createTextNode(object[i]));
             tr.appendChild(td);

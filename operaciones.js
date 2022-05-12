@@ -7,7 +7,7 @@ opFirstRow.classList.add('justify-content-between');
 
 // -- Objeto operaciones (Array) --//
 
-const data = [{
+const operaciones =[{
     description: 'Historieta',
     amount: 2000,
     type: 'Gasto',
@@ -20,14 +20,12 @@ const data = [{
     type: 'Gasto',
     category: 'Entretenimiento',
     date: '13/10/2019'
-}]
-
-console.log(JSON.stringify(data));
+}];
 
 
 //--- Card Operaciones ---//
 
-const operaciones =[];
+
 
     // -- Botón Nueva Operación -- // 
 
@@ -62,4 +60,4 @@ if (operaciones.length === 0){
 columnNames = ['description', 'amount', 'type', 'category', 'date'];
 
 createTable('operaciones', columnNames, 'operaciones');
-appendData(data, 'operaciones');
+appendData(operaciones, 'operaciones');
