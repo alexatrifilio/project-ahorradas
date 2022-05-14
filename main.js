@@ -118,7 +118,10 @@ const cardCreator = (cardTitle, cardAppend) =>{
 // Hasta ahora no la usé porque no supe como ingresarle datos a la table. - Ale
 const createTable = (tableName, columnNames, cardId) =>{
     
+   
     const table = document.createElement('table');
+    
+    
     table.setAttribute('class', 'table');
     table.setAttribute('id', tableName);
     table.classList.add('table-borderless');
@@ -130,14 +133,10 @@ const createTable = (tableName, columnNames, cardId) =>{
     card.appendChild(table)
 
     columnNames.forEach(function(object) {
-        // const col = document.createElement('col');
-        // col.setAttribute('id', object);
         var th = document.createElement('th');
         th.setAttribute('id', object)
         th.appendChild(document.createTextNode(object));
         tr.appendChild(th);
-        // colgroup.appendChild(col);
-        console.log(object);
     });
 
     const tbody = document.createElement('tbody');

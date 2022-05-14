@@ -7,7 +7,7 @@ opFirstRow.classList.add('justify-content-between', 'mb-4');
 
 // -- Objeto operaciones (Array) --//
 
-const data = [{
+const operaciones =[{
     description: 'Historieta',
     amount: 2000,
     type: 'Gasto',
@@ -20,9 +20,7 @@ const data = [{
     type: 'Gasto',
     category: 'Entretenimiento',
     date: '13/10/2019'
-}]
-
-console.log(JSON.stringify(data));
+}];
 
 
 //--- Card Operaciones ---//
