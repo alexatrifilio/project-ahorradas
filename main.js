@@ -71,6 +71,24 @@ mainContainer.setAttribute('class', 'container');
 mainContainer.classList.add('pt-5');
 main.appendChild(mainContainer);
 
+
+// ***** Initial Storage ***** // 
+const initialData = {
+    categories: [],
+    operations: []
+};
+
+const init = () => {
+    const storage = JSON.parse(localStorage.getItem('ahorradas-data'));
+
+    if(!storage){
+        localStorage.setItem('ahorradas-data', JSON.stringify(initialData))
+    }
+};
+
+init();
+
+
 const categorias = ['Comida', 'Servicios','Trabajo', 'Salidas', 'Educación', 'Transporte'];
 
 
