@@ -3,7 +3,7 @@
 cardCreator('Operaciones', col2);
 const operacionesCard = document.getElementById('operaciones');
 const opFirstRow = document.getElementById('operaciones-first-row');
-opFirstRow.classList.add('justify-content-between');
+opFirstRow.classList.add('justify-content-between', 'mb-4');
 
 // -- Objeto operaciones (Array) --//
 
@@ -25,8 +25,6 @@ const operaciones =[{
 
 //--- Card Operaciones ---//
 
-
-
     // -- Botón Nueva Operación -- // 
 
 const newOpBttn = document.createElement('a');
@@ -39,7 +37,7 @@ opFirstRow.appendChild(newOpBttn);
 
     // -- opCard SIN operaciones -- //
 
-if (operaciones.length === 0){
+if (data.length === 0){
     const opImg = document.createElement('img');
     const opImgCont = document.createElement('div');
     opImgCont.classList.add('d-flex', 'align-items-center', 'flex-column');
@@ -53,11 +51,12 @@ if (operaciones.length === 0){
     opImgCont.appendChild(opSubtitle);
     opImgCont.appendChild(opParagraph);
     operacionesCard.appendChild(opImgCont);
+}else{
+    // -- opCard CON operaciones -- //
+    
+    const columnNames = ['description', 'amount', 'type', 'category', 'date'];
+    
+    createTable('operaciones', columnNames, 'operaciones');
+    appendData(data, 'operaciones');
 }
 
-// -- opCard CON operaciones -- //
-
-columnNames = ['description', 'amount', 'type', 'category', 'date'];
-
-createTable('operaciones', columnNames, 'operaciones');
-appendData(operaciones, 'operaciones');

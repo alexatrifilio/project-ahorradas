@@ -71,6 +71,24 @@ mainContainer.setAttribute('class', 'container');
 mainContainer.classList.add('pt-5');
 main.appendChild(mainContainer);
 
+
+// ***** Initial Storage ***** // 
+const initialData = {
+    categories: [],
+    operations: []
+};
+
+const init = () => {
+    const storage = JSON.parse(localStorage.getItem('ahorradas-data'));
+
+    if(!storage){
+        localStorage.setItem('ahorradas-data', JSON.stringify(initialData))
+    }
+};
+
+init();
+
+
 const categorias = ['Comida', 'Servicios','Trabajo', 'Salidas', 'Educación', 'Transporte'];
 
 
@@ -100,14 +118,18 @@ const cardCreator = (cardTitle, cardAppend) =>{
 // Hasta ahora no la usé porque no supe como ingresarle datos a la table. - Ale
 const createTable = (tableName, columnNames, cardId) =>{
     
-    const card = document.getElementById(cardId);
+   
     const table = document.createElement('table');
-    const tr = document.createElement('tr');
+    
     
     table.setAttribute('class', 'table');
     table.setAttribute('id', tableName);
     table.classList.add('table-borderless');
-    table.appendChild(tr);
+    const thead = document.createElement('thead');
+    const tr = document.createElement('tr');
+    thead.appendChild(tr);
+    table.appendChild(thead);
+    var card = document.getElementById(cardId);
     card.appendChild(table)
 
     columnNames.forEach(function(object) {
@@ -117,15 +139,18 @@ const createTable = (tableName, columnNames, cardId) =>{
         tr.appendChild(th);
     });
 
+    const tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+
 }
 
 function appendData(data, tableName){
     var table = document.getElementById(tableName);
-
+    let tbody = table.querySelector('tbody')
     data.forEach(function(object) {
         var tr = document.createElement('tr');
-        table.appendChild(tr);
-        for(let i in object){
+        tbody.appendChild(tr);
+        for(i in object){
             var td = document.createElement('td');
             td.appendChild(document.createTextNode(object[i]));
             tr.appendChild(td);
