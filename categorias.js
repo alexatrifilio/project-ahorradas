@@ -40,15 +40,16 @@ categoriasCard.appendChild(catFields);
 
 
 // - Categories in local storage - //
-const categories = ['Comida', 'Servicios','Trabajo', 'Salidas', 'Educación', 'Transporte'];
-localStorage.setItem('categories', JSON.stringify(categories)); 
+const initialCate = ['Comida', 'Servicios','Trabajo', 'Salidas', 'Educación', 'Transporte'];
+localStorage.setItem('categories', JSON.stringify(initialCate)); 
 
-    // -- Load categories -- //
+    // -- Show categories -- //
 
 const showCategories = () => {
     const categories = JSON.parse(localStorage.getItem('categories'));
 
     categories.forEach((cat)=> {
+        let lowerCaseCat = cat.toLowerCase();
         let row = document.createElement('div');
         row.classList.add('row', 'p-3');
         let col1 = document.createElement('div');
@@ -66,7 +67,7 @@ const showCategories = () => {
         col2.appendChild(editar);
         let eliminar = document.createElement('a');
         eliminar.setAttribute('href', '#');
-        eliminar.setAttribute('class', cat);
+        eliminar.setAttribute(`data-${lowerCaseCat}`, lowerCaseCat);
         eliminar.appendChild(document.createTextNode('Eliminar'));
         col2.appendChild(eliminar);
         row.appendChild(col1);
@@ -78,9 +79,12 @@ const showCategories = () => {
 
         eliminar.addEventListener('click', (e)=> {
             const lsCategories = JSON.parse(localStorage.getItem('categories'));
+            console.log('holi');
             lsCategories.forEach((ct) => {
-                if(e.target.querySelector(`.${cat}`) === ct){
-                    lsCategories = lsCategories.splice(parseInt(index),1);
+                const lowerCaseCt = ct.toLowerCase()
+                console.log(e.target.querySelector([`data-${lowerCaseCt}="${lowerCaseCt}"`]));
+                if(e.target.querySelector(`data-${lowerCaseCt}`).includes(lowerCaseCt)){
+                    lsCategories.splice(parseInt(index),1);
                     console.log(lsCategories);
                 }
             })
