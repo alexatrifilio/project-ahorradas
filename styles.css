@@ -35,3 +35,9 @@ a{
 .op-img{
     max-width: 450px
 }
+
+/***** CATEGORIAS CARD *****/
+
+#categorias{
+    max-width: 750px;
+}

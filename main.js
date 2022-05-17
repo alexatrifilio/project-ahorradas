@@ -72,26 +72,6 @@ mainContainer.classList.add('pt-5');
 main.appendChild(mainContainer);
 
 
-// ***** Initial Storage ***** // 
-const initialData = {
-    categories: [],
-    operations: []
-};
-
-const init = () => {
-    const storage = JSON.parse(localStorage.getItem('ahorradas-data'));
-
-    if(!storage){
-        localStorage.setItem('ahorradas-data', JSON.stringify(initialData))
-    }
-};
-
-init();
-
-
-const categorias = ['Comida', 'Servicios','Trabajo', 'Salidas', 'Educación', 'Transporte'];
-
-
 // ***** Functions ***** //
 
 // ** Card Creator Function ** //
@@ -197,4 +177,38 @@ const formCreator = (inputName, inputType, formAppend, selectOpt) => {
     }
 
     formAppend.appendChild(form);
+}
+
+  // -- Single row forms -- //
+
+  const singleRowForm = (formId, formAppend, bttnAction) => {
+    const singleRowForm = document.createElement('form');
+    singleRowForm.setAttribute('action', 'submit');
+    singleRowForm.setAttribute('id', formId);
+    let row = document.createElement('div');
+    row.classList.add('row');
+    let col1 = document.createElement('div');
+    col1.classList.add('col', 'col-10');
+    let col2 = document.createElement('div');
+    col2.classList.add('col', 'col-2');
+    singleRowForm.appendChild(row);
+    row.appendChild(col1);
+    row.appendChild(col2);
+    const inpCont = document.createElement('div');
+    inpCont.classList.add('d-flex', 'flex-column');
+    let label = document.createElement('label');
+    let input = document.createElement('input');
+    input.setAttribute('id', 'nombre-cat');
+    input.setAttribute('type', 'text');
+    label.setAttribute('for', 'nombre-cat');
+    inpCont.appendChild(label);
+    inpCont.appendChild(input);
+    col1.appendChild(inpCont);
+    const catFormBttn = document.createElement('button');
+    catFormBttn.setAttribute('type', 'submit');
+    catFormBttn.classList.add('btn','btn-info', 'text-white')
+    catFormBttn.appendChild(document.createTextNode(bttnAction));
+    col2.appendChild(catFormBttn);
+    
+    formAppend.appendChild(singleRowForm);
 }
