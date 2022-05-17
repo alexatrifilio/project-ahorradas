@@ -10,7 +10,9 @@ opFirstRow.classList.add('justify-content-between', 'mb-4');
 
 
 // -- create local storage for operaciones --//
-const transactions = JSON.parse(window.localStorage.getItem('transactions')) === null ? [] : JSON.parse(window.localStorage.getItem('transactions'));
+const transactionsStorage = JSON.parse(window.localStorage.getItem('ahorradas-data'));
+const transactions = transactionsStorage.operations;
+console.log(transactions);
 
 //--- Card Operaciones ---//
 
@@ -43,7 +45,7 @@ if (transactions.length === 0){
 }else{
     // -- opCard CON operaciones -- //
     
-    const columnNames = ['description', 'amount', 'type', 'category', 'date'];
+    const columnNames = ['Descripción', 'Categoría', 'Fecha', 'Monto', 'Acción'];
     
     createTable('transactions', columnNames, 'transactions');
     appendData(transactions, 'transactions');

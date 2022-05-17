@@ -127,15 +127,26 @@ const createTable = (tableName, columnNames, cardId) =>{
 function appendData(data, tableName){
     var table = document.getElementById(tableName);
     let tbody = table.querySelector('tbody')
-    data.forEach(function(object) {
+    for (let obj of data){
         var tr = document.createElement('tr');
         tbody.appendChild(tr);
-        for(i in object){
+        for(i in obj){
+            if(i === 'type' || i === 'id'){continue}  
             var td = document.createElement('td');
-            td.appendChild(document.createTextNode(object[i]));
+            td.appendChild(document.createTextNode(obj[i]));
             tr.appendChild(td);
         }
-    });
+    }
+    // data.forEach(function(object) {
+    //     if(data.type || data.id){break}
+    //     var tr = document.createElement('tr');
+    //     tbody.appendChild(tr);
+    //     for(i in object){
+    //         var td = document.createElement('td');
+    //         td.appendChild(document.createTextNode(object[i]));
+    //         tr.appendChild(td);
+    //     }
+    // });
 }
 
 

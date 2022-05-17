@@ -3,34 +3,44 @@
 cardCreator('nueva-operacion', mainContainer);
 const nuevaOpCard = document.getElementById('nueva-operacion');
 
+const container = document.createElement('div');
+container.classList.add('col-8')
 const nuevaOpForm = document.createElement('form');
 nuevaOpForm.setAttribute('id', 'nueva-operacion-form');
 nuevaOpForm.setAttribute('class', 'form-group');
-nuevaOpCard.appendChild(nuevaOpForm);
+container.appendChild(nuevaOpForm);
+nuevaOpCard.appendChild(container);
 
 function createInputField(formId, type, name, placeholder, required){
     const form = document.getElementById(formId);
+    const inputContainer =  document.createElement('div');
     const label = document.createElement('label');
     const input = document.createElement('input');
 
+    inputContainer.classList.add('d-flex', 'flex-column', 'mb-3')
     label.setAttribute('for', name);
     label.appendChild(document.createTextNode(name));
+    label.classList.add('mb-1');
     input.setAttribute('type', type);
     input.setAttribute('name', name);
     input.setAttribute('placeholder', placeholder);
     input.setAttribute('required', required);
     input.setAttribute('id', `input-${name}`);
-    form.appendChild(label);
-    form.appendChild(input);
+    inputContainer.appendChild(label);
+    inputContainer.appendChild(input);
+    form.appendChild(inputContainer)
 }
 
 function createSelectField(formId, name, options){
     const form = document.getElementById(formId);
+    const selectContainer = document.createElement('div');
     const label = document.createElement('label');
     const select = document.createElement('select');
     const option = document.createElement('option');
 
+    selectContainer.classList.add('d-flex', 'flex-column', 'mb-3')
     label.setAttribute('for', name);
+    label.classList.add('mb-1');
     label.appendChild(document.createTextNode(name));
     select.setAttribute('name', name);
     option.appendChild(document.createTextNode('Seleccione una opción'));
@@ -41,22 +51,34 @@ function createSelectField(formId, name, options){
         option.appendChild(document.createTextNode(options[i]));
         select.appendChild(option);
     }
-    form.appendChild(label);
-    form.appendChild(select);
+    selectContainer.appendChild(label);
+    selectContainer.appendChild(select);
+    form.appendChild(selectContainer)
 }
 
 fieldNames = ['description', 'amount', 'type', 'category', 'date']
 
+// -- get the table transactions from local storage --//
+
+const transactionsStorage = JSON.parse(window.localStorage.getItem('ahorradas-data'));
+const transactions = transactionsStorage.operations;
+const categories = transactionsStorage.categories;
+const formCategories = []
+const loadCategories = cat => {
+    for (let obj of cat){
+       formCategories.push(obj.cat);
+    }
+}
+loadCategories(categories)
+
 createInputField('nueva-operacion-form', 'text', 'description', '', true);
 createInputField('nueva-operacion-form', 'number', 'amount', '', true);
 createSelectField('nueva-operacion-form', 'type', ['Ingreso', 'Gasto']);
-createSelectField('nueva-operacion-form', 'category', ['Entretenimiento', 'Salud', 'Renta', 'Otros']);
+createSelectField('nueva-operacion-form', 'category', formCategories);
 createInputField('nueva-operacion-form', 'date', 'date', '', true);
 
-// -- get the table transactions from local storage --//
 
-const transactions = JSON.parse(window.localStorage.getItem('transactions'));
-console.log(transactions);
+
 
 // Create a button to submit the form and save the info in an array in the local storage
 
@@ -78,16 +100,20 @@ function saveOperation(e){
     const date = document.getElementById('input-date').value;
 
     const newTransaction = {
+        id : `${randomId()}`,
         description,
-        amount,
-        type,
         category,
-        date
+        date,
+        amount,
+        type
     }
 
     transactions.push(newTransaction);
-    window.localStorage.setItem('transactions', JSON.stringify(transactions));
-    console.log(transactions);
+    window.localStorage.setItem('ahorradas-data', JSON.stringify({
+        ...transactionsStorage,
+        operations: transactions
+    }));
+    console.log(transactionsStorage);
 }
 
 // Add an event listener to the submit button to save the info in an array in the local storage
