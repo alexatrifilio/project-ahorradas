@@ -1,27 +1,16 @@
 //--- Card Operaciones ---//
 
-cardCreator('Operaciones', col2);
-const operacionesCard = document.getElementById('operaciones');
-const opFirstRow = document.getElementById('operaciones-first-row');
+//col2 = document.getElementById('col2')
+//console.log(col2);
+
+cardCreator('transactions', col2);
+const operacionesCard = document.getElementById('transactions');
+const opFirstRow = document.getElementById('transactions-first-row');
 opFirstRow.classList.add('justify-content-between', 'mb-4');
 
-// -- Objeto operaciones (Array) --//
 
-const operaciones =[{
-    description: 'Historieta',
-    amount: 2000,
-    type: 'Gasto',
-    category: 'Entretenimiento',
-    date: '10/10/2020'
-},
-{
-    description: 'perro',
-    amount: 5000,
-    type: 'Gasto',
-    category: 'Entretenimiento',
-    date: '13/10/2019'
-}];
-
+// -- create local storage for operaciones --//
+const transactions = JSON.parse(window.localStorage.getItem('transactions')) === null ? [] : JSON.parse(window.localStorage.getItem('transactions'));
 
 //--- Card Operaciones ---//
 
@@ -37,7 +26,7 @@ opFirstRow.appendChild(newOpBttn);
 
     // -- opCard SIN operaciones -- //
 
-if (data.length === 0){
+if (transactions.length === 0){
     const opImg = document.createElement('img');
     const opImgCont = document.createElement('div');
     opImgCont.classList.add('d-flex', 'align-items-center', 'flex-column');
@@ -56,7 +45,7 @@ if (data.length === 0){
     
     const columnNames = ['description', 'amount', 'type', 'category', 'date'];
     
-    createTable('operaciones', columnNames, 'operaciones');
-    appendData(data, 'operaciones');
+    createTable('transactions', columnNames, 'transactions');
+    appendData(transactions, 'transactions');
 }
 
