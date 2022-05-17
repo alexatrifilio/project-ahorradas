@@ -71,7 +71,7 @@ filtFirstRow.appendChild(hideFilters);
 
 const filtInputs = ['tipo', 'categoría', 'desde', 'ordenar-por'];
 const filtInputType = ['select', 'select', 'date', 'select'];
-const filtSelect = [['Todos', 'Gasto', 'Ganancia'], categorias, ['Más reciente', 'Menos reciente', 'Mayor monto', 'Menor monto', 'A/Z', 'Z/A']];
+const filtSelect = [['Todos', 'Gasto', 'Ganancia'], ['Más reciente', 'Menos reciente', 'Mayor monto', 'Menor monto', 'A/Z', 'Z/A']];
 
 formCreator(filtInputs, filtInputType, filtrosCard, filtSelect);
 

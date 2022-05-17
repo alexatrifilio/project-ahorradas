@@ -6,94 +6,11 @@ const categoriasCard = document.getElementById('categorias');
 
     // -- Form -- //
 
-const categoriasForm = document.createElement('form');
-categoriasForm.setAttribute('action', 'submit');
-let row = document.createElement('div');
-row.classList.add('row');
-let col1 = document.createElement('div');
-col1.classList.add('col', 'col-10');
-let col2 = document.createElement('div');
-col2.classList.add('col', 'col-2');
-categoriasForm.appendChild(row);
-row.appendChild(col1);
-row.appendChild(col2);
-const inpCont = document.createElement('div');
-inpCont.classList.add('d-flex', 'flex-column');
-let label = document.createElement('label');
-let input = document.createElement('input');
-input.setAttribute('id', 'nombre-cat');
-input.setAttribute('type', 'text');
-label.setAttribute('for', 'nombre-cat');
-inpCont.appendChild(label);
-inpCont.appendChild(input);
-col1.appendChild(inpCont);
-const catFormBttn = document.createElement('button');
-catFormBttn.setAttribute('type', 'submit');
-catFormBttn.classList.add('btn','btn-info', 'text-white')
-catFormBttn.appendChild(document.createTextNode('agregar'));
-col2.appendChild(catFormBttn);
-
-categoriasCard.appendChild(categoriasForm);
+singleRowForm('categorias-form', categoriasCard, 'Agregar');
 
 const catFields = document.createElement('div');
 categoriasCard.appendChild(catFields);
 
-
-// - Categories in local storage - //
-
-const idKeys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz';
-const randomId = ()=> {
-    let finalId = '';
-    for(let i = 0; i < 9; i++){
-        const random = Math.floor(Math.random()*idKeys.length);
-        let elem = idKeys.slice(random, random+1);
-        finalId = finalId.concat(elem);
-    }
-    return finalId
-}
-
-const initialCategories = [{
-    id: `${randomId()}`,
-    cat: 'Comida'
-},
-{
-    id: `${randomId()}`,
-    cat: 'Servicios'
-},
-{
-    id: `${randomId()}`,
-    cat: 'Salidas'
-},
-{
-    id: `${randomId()}`,
-    cat: 'Educación'
-},
-{
-    id: `${randomId()}`,
-    cat: 'Transporte'
-},
-{
-    id: `${randomId()}`,
-    cat: 'Trabajo'
-},
-]
-
-
-
-const initCat = () => {
-    const storage = JSON.parse(localStorage.getItem('ahorradas-data'));
-
-        if(storage.categories.length === 0){
-            for (let elem of initialCategories){
-                storage.categories.push(elem)
-            }
-            localStorage.setItem('ahorradas-data', JSON.stringify(storage))
-        }
-
-
-};
-
-initCat()
 
     // -- Show categories -- //
 
@@ -119,6 +36,7 @@ const showCategories = () => {
             col2.appendChild(editar);
             let eliminar = document.createElement('a');
             eliminar.setAttribute('href', '#');
+            eliminar.setAttribute('id', `${cat.id}`)
             eliminar.appendChild(document.createTextNode('Eliminar'));
             col2.appendChild(eliminar);
             row.appendChild(col1);
@@ -129,25 +47,33 @@ const showCategories = () => {
 
             // -- Eliminar event -- //
         
-        // eliminar.addEventListener('click', (e)=> {
-        //     const lsCategories = JSON.parse(localStorage.getItem('categories'));
-        //     console.log('holi');
-        //     lsCategories.forEach((ct) => {
-        //         const lowerCaseCt = ct.toLowerCase()
-        //         console.log(e.target.querySelector([`data-${lowerCaseCt}="${lowerCaseCt}"`]));
-        //         if(e.target.querySelector(`data-${lowerCaseCt}`).includes(lowerCaseCt)){
-        //             lsCategories.splice(parseInt(index),1);
-        //             console.log(lsCategories);
-        //         }
-        //     })
-        // })
+        eliminar.addEventListener('click', (e)=> {
+            const lS = JSON.parse(localStorage.getItem('ahorradas-data'));
+            const categs = lS.categories
+            for (let i = 0; i < categs.length; i++){
+                if(categs[i].id === e.target.id){
+                    categs.splice(categs[i], 1);
+                }
+            }
+            localStorage.setItem('ahorradas-data', JSON.stringify({
+                ...lS,
+                categories: categs
+            }))
+            catFields.innerHTML = "";
+
+            showCategories()
+            
+
+        })
 
     })    
 }
 
 showCategories();
 
-    // -- Submit Event -- //
+    // -- Add Category Event -- //
+
+    const categoriasForm = document.getElementById('categorias-form');
 
     categoriasForm.addEventListener('submit', (e)=>{
         e.preventDefault();
@@ -163,4 +89,5 @@ showCategories();
     
     })  
 
-
+     
+ 
