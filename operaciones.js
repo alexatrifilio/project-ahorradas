@@ -1,18 +1,16 @@
 //--- Card Operaciones ---//
 
-//col2 = document.getElementById('col2')
-//console.log(col2);
 
-cardCreator('transactions', col2);
-const operacionesCard = document.getElementById('transactions');
-const opFirstRow = document.getElementById('transactions-first-row');
+cardCreator('Operaciones', col2);
+const operacionesCard = document.getElementById('operaciones');
+const opFirstRow = document.getElementById('operaciones-first-row');
 opFirstRow.classList.add('justify-content-between', 'mb-4');
 
 
 // -- create local storage for operaciones --//
 const transactionsStorage = JSON.parse(window.localStorage.getItem('ahorradas-data'));
 const transactions = transactionsStorage.operations;
-console.log(transactions);
+
 
 //--- Card Operaciones ---//
 
@@ -47,7 +45,7 @@ if (transactions.length === 0){
     
     const columnNames = ['Descripción', 'Categoría', 'Fecha', 'Monto', 'Acción'];
     
-    createTable('transactions', columnNames, 'transactions');
+    createTable('transactions', columnNames, 'operaciones');
     appendData(transactions, 'transactions');
 }
 

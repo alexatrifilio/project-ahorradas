@@ -31,12 +31,13 @@ const showCategories = () => {
             col1.appendChild(span);
             let editar = document.createElement('a');
             editar.setAttribute('href', `./editar-categoria.html?id=${cat.id}`);
-            editar.classList.add('me-2');
+            editar.classList.add('me-2', 's-link');
             editar.appendChild(document.createTextNode('Editar'));
             col2.appendChild(editar);
             let eliminar = document.createElement('a');
             eliminar.setAttribute('href', '#');
-            eliminar.setAttribute('id', `${cat.id}`)
+            eliminar.setAttribute('id', `${cat.id}`);
+            eliminar.classList.add('s-link');
             eliminar.appendChild(document.createTextNode('Eliminar'));
             col2.appendChild(eliminar);
             row.appendChild(col1);

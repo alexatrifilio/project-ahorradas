@@ -95,7 +95,7 @@ const cardCreator = (cardTitle, cardAppend) =>{
 
 // ** Table Creator Function ** //
 
-// Hasta ahora no la usé porque no supe como ingresarle datos a la table. - Ale
+
 const createTable = (tableName, columnNames, cardId) =>{
     
    
@@ -126,27 +126,67 @@ const createTable = (tableName, columnNames, cardId) =>{
 
 function appendData(data, tableName){
     var table = document.getElementById(tableName);
-    let tbody = table.querySelector('tbody')
+    let tbody = table.querySelector('tbody');
+
     for (let obj of data){
         var tr = document.createElement('tr');
         tbody.appendChild(tr);
         for(i in obj){
             if(i === 'type' || i === 'id'){continue}  
             var td = document.createElement('td');
+            if(obj.type === 'Gasto'){
+                if(obj[i] > 0){
+                    td.classList.add('expense');
+                }
+            } else if(obj.type === 'Ingreso'){
+                if(obj[i] > 0){
+                    td.classList.add('income');
+                }
+            }
             td.appendChild(document.createTextNode(obj[i]));
             tr.appendChild(td);
         }
+        const tdLinks = document.createElement('td');
+        const tdCont = document.createElement('div');
+        tdCont.classList.add('d-flex', 'flex-column')
+        const edit = document.createElement('a');
+        const del = document.createElement('a');
+        del.setAttribute('href', '#');
+        del.setAttribute('id', `${obj.id}`);
+        del.classList.add('s-link');
+        edit.appendChild(document.createTextNode('Editar'));
+        edit.setAttribute('href',`./editar-operacion.html?id=${obj.id}`);
+        edit.classList.add('s-link');
+        del.appendChild(document.createTextNode('Eliminar'));
+        tdCont.appendChild(edit);
+        tdCont.appendChild(del);
+        tdLinks.appendChild(tdCont);
+        tr.appendChild(tdLinks);
+
+        // -- Eliminar event -- //
+
+        del.addEventListener('click', (e)=> {
+            const lS = JSON.parse(localStorage.getItem('ahorradas-data'));
+            const ops = lS.operations
+            
+            for (let i = 0; i < ops.length; i++){
+                if(ops[i].id === e.target.id){                 
+                    ops.splice(i, 1);
+                }
+            }
+            localStorage.setItem('ahorradas-data', JSON.stringify({
+                ...lS,
+                operations: ops
+            }))
+            
+            tbody.innerHTML = "";
+
+            appendData(lS.operations, 'transactions');
+            
+
+        })
     }
-    // data.forEach(function(object) {
-    //     if(data.type || data.id){break}
-    //     var tr = document.createElement('tr');
-    //     tbody.appendChild(tr);
-    //     for(i in object){
-    //         var td = document.createElement('td');
-    //         td.appendChild(document.createTextNode(object[i]));
-    //         tr.appendChild(td);
-    //     }
-    // });
+    
 }
 
 

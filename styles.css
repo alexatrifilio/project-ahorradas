@@ -36,6 +36,26 @@ a{
     max-width: 450px
 }
 
+.expense{
+    color: red;
+}
+
+.expense::before{
+    content: '-$';
+}
+
+.income{
+    color: green;
+}
+
+.income::before{
+    content: '+$';
+}
+
+.s-link{
+    font-size: 0.9rem;
+}
+
 /***** CATEGORIAS CARD *****/
 
 #categorias{
