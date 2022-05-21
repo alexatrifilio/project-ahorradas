@@ -125,11 +125,11 @@ const createTable = (tableName, columnNames, cardId) =>{
 }
 
 function appendData(data, tableName){
-    var table = document.getElementById(tableName);
+    const table = document.getElementById(tableName);
     let tbody = table.querySelector('tbody');
 
     for (let obj of data){
-        var tr = document.createElement('tr');
+        const tr = document.createElement('tr');
         tbody.appendChild(tr);
         for(i in obj){
             if(i === 'type' || i === 'id'){continue}  
@@ -179,9 +179,22 @@ function appendData(data, tableName){
                 operations: ops
             }))
             
+            // Refresh transactions table //
+            
             tbody.innerHTML = "";
 
             appendData(lS.operations, 'transactions');
+
+            if(ops.length === 0) { 
+                table.innerHTML = "";
+                noTransactionsImage() };
+
+            // Refresh balance table //
+
+            const balanceTBody = document.getElementById('balance-tBody');
+            balanceTBody.innerHTML = "";
+
+            balanceTbCreator();
             
 
         })
