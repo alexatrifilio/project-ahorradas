@@ -132,8 +132,8 @@ function appendData(data, tableName){
         const tr = document.createElement('tr');
         tbody.appendChild(tr);
         for(i in obj){
-            if(i === 'type' || i === 'id'){continue}  
-            var td = document.createElement('td');
+            if(i === 'type' || i === 'id'){continue}
+            let td = document.createElement('td');
             if(obj.type === 'Gasto'){
                 if(obj[i] > 0){
                     td.classList.add('expense');
@@ -143,7 +143,13 @@ function appendData(data, tableName){
                     td.classList.add('income');
                 }
             }
-            td.appendChild(document.createTextNode(obj[i]));
+            if(i === 'category'){
+                const span = document.createElement('span');
+                span.classList.add('d-inline-block','bg-info', 'bg-opacity-25', 'p-1', 's-tag');
+                span.appendChild(document.createTextNode(obj[i]));
+                td.appendChild(span);
+            } else{td.appendChild(document.createTextNode(obj[i]));}
+            
             tr.appendChild(td);
         }
         const tdLinks = document.createElement('td');
