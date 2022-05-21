@@ -26,20 +26,24 @@ opFirstRow.appendChild(newOpBttn);
 
     // -- opCard SIN operaciones -- //
 
+ const noTransactionsImage = () =>{
+     const opImg = document.createElement('img');
+     const opImgCont = document.createElement('div');
+     opImgCont.classList.add('d-flex', 'align-items-center', 'flex-column');
+     opImg.setAttribute('src', './assets/savings.png');
+     opImg.classList.add('op-img');
+     const opSubtitle = document.createElement('h3');
+     opSubtitle.appendChild(document.createTextNode('Sin resultados'));
+     const opParagraph = document.createElement('p');
+     opParagraph.appendChild(document.createTextNode('Cambia los filtros o agrega operaciones.'))
+     opImgCont.appendChild(opImg);
+     opImgCont.appendChild(opSubtitle);
+     opImgCont.appendChild(opParagraph);
+     operacionesCard.appendChild(opImgCont);
+ }   
+
 if (transactions.length === 0){
-    const opImg = document.createElement('img');
-    const opImgCont = document.createElement('div');
-    opImgCont.classList.add('d-flex', 'align-items-center', 'flex-column');
-    opImg.setAttribute('src', './assets/savings.png');
-    opImg.classList.add('op-img');
-    const opSubtitle = document.createElement('h3');
-    opSubtitle.appendChild(document.createTextNode('Sin resultados'));
-    const opParagraph = document.createElement('p');
-    opParagraph.appendChild(document.createTextNode('Cambia los filtros o agrega operaciones.'))
-    opImgCont.appendChild(opImg);
-    opImgCont.appendChild(opSubtitle);
-    opImgCont.appendChild(opParagraph);
-    operacionesCard.appendChild(opImgCont);
+    noTransactionsImage();
 }else{
     // -- opCard CON operaciones -- //
     

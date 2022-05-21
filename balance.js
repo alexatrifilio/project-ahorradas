@@ -16,19 +16,51 @@ mainContainer.appendChild(row);
 //--- Card Balance ---//
 
 cardCreator('Balance', col1);
-// TableCreator(0,3,2);
+
 const balanceCard = document.getElementById('balance');
-const balance = {
-    ganancias: 5,
-    gastos: 8,
-    total: function () {return this.ganancias + this.gastos}
+const income = () =>{
+    const storage = JSON.parse(localStorage.getItem('ahorradas-data'));
+    const storedTrans = storage.operations;
+    const amounts = [];
+    for (let obj of storedTrans){
+        if(obj.type === 'Ingreso'){
+            amounts.push(parseInt(obj.amount))
+        }
+    }
+    const sum = amounts.reduce((acc, curr) => {return acc + curr}, 0);
+    return sum;
+
 }
-const balanceTbCreator = (balance)=>{
-    let table = document.createElement('table');
-    table.setAttribute('class', 'table');
-    table.classList.add('table-borderless');
-    let tBody = document.createElement('tbody');
-    table.appendChild(tBody);
+
+const expenses = () =>{
+    const storage = JSON.parse(localStorage.getItem('ahorradas-data'));
+    const storedTrans = storage.operations;
+    const amounts = [];
+    for (let obj of storedTrans){
+        if(obj.type === 'Gasto'){
+            amounts.push(parseInt(obj.amount))
+        }
+    }
+    const sum = amounts.reduce((acc, curr) => {return acc + curr}, 0);
+    return sum;
+
+}
+
+
+let table = document.createElement('table');
+table.setAttribute('id', 'balance-table')
+table.setAttribute('class', 'table');
+table.classList.add('table-borderless');
+let tBody = document.createElement('tbody');
+tBody.setAttribute('id', 'balance-tBody');
+table.appendChild(tBody);
+
+const balanceTbCreator = ()=>{
+    const balance = {
+        ganancias: income(),
+        gastos: expenses(),
+        total: function () {return this.ganancias - this.gastos}
+    }
 
     for (let prop in balance){
         let row = document.createElement('tr')
@@ -38,11 +70,15 @@ const balanceTbCreator = (balance)=>{
         cell.appendChild(textNode);
         let cell2 = document.createElement('td');
         if (prop === 'total'){
-            let textVNode = document.createTextNode(`$ ${balance.total()}`)
+            let textVNode = document.createTextNode(`$${balance.total()}`)
             cell2.appendChild(textVNode);
-        }else{
-            let textVNode = document.createTextNode(`$ ${balance[prop]}`);
-            cell2.setAttribute('class', `val-${prop}`);
+        }else if (prop === 'ganancias'){            
+            let textVNode = document.createTextNode(`${balance[prop]}`);
+            cell2.setAttribute('class', 'income');
+            cell2.appendChild(textVNode);
+        } else if (prop === 'gastos'){
+            let textVNode = document.createTextNode(`${balance[prop]}`);
+            cell2.setAttribute('class', 'expense');
             cell2.appendChild(textVNode);
         }
         row.appendChild(cell)
