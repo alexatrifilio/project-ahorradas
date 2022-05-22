@@ -276,3 +276,52 @@ const formCreator = (inputName, inputType, formAppend, selectOpt) => {
     
     formAppend.appendChild(singleRowForm);
 }
+
+// -- input field creator --//
+
+function createInputField(formId, type, name, fielTitle, placeholder, required){
+    const form = document.getElementById(formId);
+    const inputContainer =  document.createElement('div');
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+
+    inputContainer.classList.add('d-flex', 'flex-column', 'mb-3')
+    label.setAttribute('for', fielTitle);
+    label.appendChild(document.createTextNode(fielTitle));
+    label.classList.add('mb-1');
+    input.setAttribute('type', type);
+    input.setAttribute('name', name);
+    input.setAttribute('placeholder', placeholder);
+    input.setAttribute('required', required);
+    input.setAttribute('id', `input-${name}`);
+    inputContainer.appendChild(label);
+    inputContainer.appendChild(input);
+    form.appendChild(inputContainer)
+}
+
+// -- Select field creator --//
+
+function createSelectField(formId, name, fieldTitle, options){
+    const form = document.getElementById(formId);
+    const selectContainer = document.createElement('div');
+    const label = document.createElement('label');
+    const select = document.createElement('select');
+    const option = document.createElement('option');
+
+    selectContainer.classList.add('d-flex', 'flex-column', 'mb-3')
+    label.setAttribute('for', fieldTitle);
+    label.classList.add('mb-1');
+    label.appendChild(document.createTextNode(fieldTitle));
+    select.setAttribute('name', name);
+    option.appendChild(document.createTextNode('Seleccione una opción'));
+    select.appendChild(option);
+    select.setAttribute('id', `select-${name}`);
+    for (let i in options){
+        const option = document.createElement('option');
+        option.appendChild(document.createTextNode(options[i]));
+        select.appendChild(option);
+    }
+    selectContainer.appendChild(label);
+    selectContainer.appendChild(select);
+    form.appendChild(selectContainer)
+}
