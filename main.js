@@ -67,8 +67,8 @@ navItemCreator('pie_chart', 'Reportes', './reportes.html');
 const main = document.createElement('main');
 body.appendChild(main);
 const mainContainer = document.createElement('div');
-mainContainer.setAttribute('class', 'container');
-mainContainer.classList.add('pt-5');
+mainContainer.setAttribute('id', 'main-cont');
+mainContainer.classList.add('container','pt-5');
 main.appendChild(mainContainer);
 
 
@@ -78,16 +78,23 @@ main.appendChild(mainContainer);
 
 const cardCreator = (cardTitle, cardAppend) =>{
     const card = document.createElement('div');
-    let intCardTitle = cardTitle.toLowerCase();
+    const intCardTitle = cardTitle.toLowerCase();
     card.setAttribute('class','card');
     card.setAttribute('id', intCardTitle);
-    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded');
+    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded', 'cards');
     const firstCardRow = document.createElement('div');
     firstCardRow.setAttribute('class', 'd-flex');
     firstCardRow.setAttribute('id', `${intCardTitle}-first-row`);
     const cTitle = document.createElement('h2');
-    const cardTitleText = document.createTextNode(cardTitle);
-    cTitle.appendChild(cardTitleText);
+    if(cardTitle.includes('-')){
+        const cardTitleNew = cardTitle.replace(/-/g,' ');
+        const cardTitleText = document.createTextNode(cardTitleNew);    
+        cTitle.appendChild(cardTitleText);
+    }else{
+
+        const cardTitleText = document.createTextNode(cardTitle);
+        cTitle.appendChild(cardTitleText);
+    }
     firstCardRow.appendChild(cTitle);
     card.appendChild(firstCardRow);
     cardAppend.appendChild(card);

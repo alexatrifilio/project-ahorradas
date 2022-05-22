@@ -4,6 +4,10 @@ a{
     text-decoration: none;
 }
 
+.cards{
+    max-width: 750px;
+}
+
 /***** HEADER *****/
 .navbar-nav{
     flex-direction: row;
@@ -17,6 +21,7 @@ a{
     font-size: 45px;
 }
 
+/***** BALANCE LAYOUT *****/
 
 /***** BALANCE CARD *****/
 .val-ganancias{
@@ -57,10 +62,6 @@ a{
 }
 
 /***** CATEGORIAS CARD *****/
-
-#categorias{
-    max-width: 750px;
-}
 
 .s-tag{
     font-size: 0.8rem;

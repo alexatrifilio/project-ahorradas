@@ -134,29 +134,74 @@ const totalCatTbody = document.createElement('tbody');
 const lStore = JSON.parse(localStorage.getItem('ahorradas-data'));
 const lStoreCat = lStore.categories;
 
-lStoreCat.forEach((cat)=>{
+
+
+
+
+for(let cat of lStoreCat){
+
+    const objCat = [];
+    const amountsInc = []; 
+    const amountsExp =[];
+
+    lStore.operations.forEach((obj)=>{
+
+        if(obj.category === cat.cat){
+            objCat.push(obj)
+        }    
+    })
+
+    objCat.forEach((obj)=>{
+        if(obj.type === 'Ingreso'){
+            amountsInc.push(parseInt(obj.amount));
+        }
+    })
+    
+    objCat.forEach((obj)=>{
+        if(obj.type === 'Gasto'){
+            amountsExp.push(parseInt(obj.amount));
+        }
+    })
+
+    const totalInc = amountsInc.reduce((acc, current) =>{
+        return acc + current
+    }, 0)
+
+    const totalExp = amountsExp.reduce((acc, current) =>{
+        return acc + current
+    }, 0)
+
+    const balance = () => {return `$${totalInc - totalExp}`};
+
     const tr = document.createElement('tr');
     const cell1 = document.createElement('td');
     cell1.appendChild(document.createTextNode(cat.cat));
     const cell2 = document.createElement('td');
-    
-    const catIncome = lStore.operations.filter((obj) => {
-        if(obj.category === cat.cat){
-            
-        }
-    })
-    
-    
+    cell2.appendChild(document.createTextNode(totalInc));
+    cell2.classList.add('income');    
     const cell3 = document.createElement('td');
+    cell3.appendChild(document.createTextNode(totalExp));
+    cell3.classList.add('expense');  
     const cell4 = document.createElement('td');
-})
+    cell4.appendChild(document.createTextNode(balance()));
+
+    tr.appendChild(cell1);
+    tr.appendChild(cell2);
+    tr.appendChild(cell3);
+    tr.appendChild(cell4);
+    totalCatTbody.appendChild(tr)
+};
 
 
 totalCatTable.appendChild(totalCatThead);
 totalCatTable.appendChild(totalCatTbody);
 totalCatSection.appendChild(totalCatTable);
 
+// - Totales por mes - //
 
+lStore.operations.forEach((op)=>{
+   
+})
 
 
 

@@ -1,6 +1,6 @@
 // --- CARD --- //
 
-cardCreator('nueva-operacion', mainContainer);
+cardCreator('Nueva-operacion', mainContainer);
 const nuevaOpCard = document.getElementById('nueva-operacion');
 
 const container = document.createElement('div');

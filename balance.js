@@ -1,14 +1,13 @@
 // -- LAYOUT -- //
     // - row - //
 const row = document.createElement('div');
-row.setAttribute('class', 'row');
-row.classList.add('row-cols-2');
+row.classList.add('row','row-cols-2');
 
     // - cols - //
 const col1 = document.createElement('div');
-col1.setAttribute('class', 'col-3');
+col1.classList.add('col-3');
 const col2 = document.createElement('div');
-col2.setAttribute('class', 'col-8');
+col2.classList.add('col-8');
 row.appendChild(col1);
 row.appendChild(col2);
 mainContainer.appendChild(row);
