@@ -9,10 +9,10 @@ header.classList.add('bg-gradient', 'text-white', 'px-5', 'py-2');
 const navBar = document.createElement('nav');
 navBar.classList.add('navbar', 'navbar-expand-lg');
 const contFluid =document.createElement('div');
-contFluid.classList.add('container-fluid');
+contFluid.classList.add('container-fluid','d-flex', 'list-nav');
 const brand = document.createElement('a');
 brand.setAttribute('class', 'navbar-brand');
-brand.classList.add('d-flex', 'text-white')
+brand.classList.add('d-flex', 'text-white', 'me-auto')
 brand.setAttribute('href', './index.html');
 const hIcon = document.createElement('span');
 hIcon.setAttribute('class', 'material-symbols-outlined');
@@ -33,25 +33,29 @@ body.appendChild(header)
 const toggler = document.createElement('button');
 toggler.classList.add('navbar-toggler');
 toggler.setAttribute('type', 'button');
-toggler.setAttribute('data-bs-toggle', 'collapse');
+toggler.setAttribute('data-bs-toggle', "collapse");
 toggler.setAttribute('data-bs-target', '#navbarToggler1');
 toggler.setAttribute('aria-controls', 'navbarToggler1');
 toggler.setAttribute('aria-expanded', 'false');
 toggler.setAttribute('aria-label', 'Toggle navigation')
 const togglerIcon = document.createElement('span');
-togglerIcon.classList.add('navbar-toggler-icon', 'material-symbols-outlined');
+togglerIcon.classList.add('navbar-toggler-icon', 'material-symbols-outlined', 'burger');
 togglerIcon.appendChild(document.createTextNode('menu'));
 toggler.appendChild(togglerIcon);
 contFluid.appendChild(toggler);
 
+toggler.addEventListener('click',(e)=>{
+    listContainer.classList.toggle("collapse")
+})
+
      // ** Header Buttons ** //
 
 const listContainer = document.createElement('div');
-listContainer.classList.add('d-flex', 'justify-content-between', 'list-nav', 'collapse', 'navbar-collapse');
+listContainer.classList.add('collapse','navbar-collapse');
 listContainer.setAttribute('id', 'navbarToggler1');
 contFluid.appendChild(listContainer);
 const navList = document.createElement('ul');
-navList.setAttribute('class', 'navbar-nav');
+navList.classList.add('navbar-nav', 'align-self-end');
 listContainer.appendChild(navList);
 
 
