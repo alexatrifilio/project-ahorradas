@@ -202,6 +202,13 @@ function appendData(data, tableName){
     
 }
 
+function replaceData(data, tableName){
+    const table = document.getElementById(tableName);
+    let tbody = table.querySelector('tbody');
+    tbody.innerHTML = "";
+    appendData(data, tableName);
+}
+
 
 // ** Form Creator ** //
 
