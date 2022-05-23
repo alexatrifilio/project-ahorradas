@@ -1,8 +1,7 @@
 // -- LAYOUT -- //
     // - row - //
 const row = document.createElement('div');
-row.setAttribute('class', 'row');
-row.classList.add('row-cols-2');
+row.classList.add('row','row-cols-2');
 
     // - cols - //
 const col1 = document.createElement('div');

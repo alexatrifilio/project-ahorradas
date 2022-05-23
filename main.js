@@ -44,18 +44,18 @@ togglerIcon.appendChild(document.createTextNode('menu'));
 toggler.appendChild(togglerIcon);
 contFluid.appendChild(toggler);
 
-toggler.addEventListener('click',(e)=>{
-    listContainer.classList.toggle("collapse")
-})
+// toggler.addEventListener('click',(e)=>{
+//     listContainer.classList.toggle("collapse")
+// })
 
      // ** Header Buttons ** //
 
 const listContainer = document.createElement('div');
-listContainer.classList.add('collapse','navbar-collapse');
+listContainer.classList.add('collapse','navbar-collapse', 'justify-content-end');
 listContainer.setAttribute('id', 'navbarToggler1');
 contFluid.appendChild(listContainer);
 const navList = document.createElement('ul');
-navList.classList.add('navbar-nav', 'align-self-end');
+navList.classList.add('navbar-nav', 'd-flex','justify-content-end');
 listContainer.appendChild(navList);
 
 
