@@ -2,59 +2,16 @@
 
 cardCreator('nueva-operacion', mainContainer);
 const nuevaOpCard = document.getElementById('nueva-operacion');
-
 const container = document.createElement('div');
-container.classList.add('col-8')
 const nuevaOpForm = document.createElement('form');
+
+container.classList.add('col-8')
 nuevaOpForm.setAttribute('id', 'nueva-operacion-form');
 nuevaOpForm.setAttribute('class', 'form-group');
 container.appendChild(nuevaOpForm);
 nuevaOpCard.appendChild(container);
 
-function createInputField(formId, type, name, placeholder, required){
-    const form = document.getElementById(formId);
-    const inputContainer =  document.createElement('div');
-    const label = document.createElement('label');
-    const input = document.createElement('input');
 
-    inputContainer.classList.add('d-flex', 'flex-column', 'mb-3')
-    label.setAttribute('for', name);
-    label.appendChild(document.createTextNode(name));
-    label.classList.add('mb-1');
-    input.setAttribute('type', type);
-    input.setAttribute('name', name);
-    input.setAttribute('placeholder', placeholder);
-    input.setAttribute('required', required);
-    input.setAttribute('id', `input-${name}`);
-    inputContainer.appendChild(label);
-    inputContainer.appendChild(input);
-    form.appendChild(inputContainer)
-}
-
-function createSelectField(formId, name, options){
-    const form = document.getElementById(formId);
-    const selectContainer = document.createElement('div');
-    const label = document.createElement('label');
-    const select = document.createElement('select');
-    const option = document.createElement('option');
-
-    selectContainer.classList.add('d-flex', 'flex-column', 'mb-3')
-    label.setAttribute('for', name);
-    label.classList.add('mb-1');
-    label.appendChild(document.createTextNode(name));
-    select.setAttribute('name', name);
-    option.appendChild(document.createTextNode('Seleccione una opción'));
-    select.appendChild(option);
-    select.setAttribute('id', `select-${name}`);
-    for (let i in options){
-        const option = document.createElement('option');
-        option.appendChild(document.createTextNode(options[i]));
-        select.appendChild(option);
-    }
-    selectContainer.appendChild(label);
-    selectContainer.appendChild(select);
-    form.appendChild(selectContainer)
-}
 
 fieldNames = ['description', 'amount', 'type', 'category', 'date']
 
@@ -71,11 +28,11 @@ const loadCategories = cat => {
 }
 loadCategories(categories)
 
-createInputField('nueva-operacion-form', 'text', 'description', '', true);
-createInputField('nueva-operacion-form', 'number', 'amount', '', true);
-createSelectField('nueva-operacion-form', 'type', ['Ingreso', 'Gasto']);
-createSelectField('nueva-operacion-form', 'category', formCategories);
-createInputField('nueva-operacion-form', 'date', 'date', '', true);
+createInputField('nueva-operacion-form', 'text', 'description', 'Descripción', '', true);
+createInputField('nueva-operacion-form', 'number', 'amount', 'Monto', '', true);
+createSelectField('nueva-operacion-form', 'type', 'Tipo', ['Ingreso', 'Gasto']);
+createSelectField('nueva-operacion-form', 'category', 'Categoría', formCategories);
+createInputField('nueva-operacion-form', 'date', 'date', 'Fecha', '', true);
 
 
 
