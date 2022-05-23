@@ -91,24 +91,7 @@ const balanceTbCreator = ()=>{
 
 balanceTbCreator(balance);
 
-//--- Card Filtros ---//
 
-cardCreator('Filtros', col1);
-const filtrosCard = document.getElementById('filtros');
-const filtFirstRow = document.getElementById('filtros-first-row');
-filtFirstRow.classList.add('justify-content-between');
-const hideFilters = document.createElement('a');
-hideFilters.setAttribute('href', '#');
-hideFilters.classList.add('d-inline-block');
-hideFilters.appendChild(document.createTextNode('Ocultar filtros'));
-filtFirstRow.appendChild(hideFilters);
 
-    // -- Filtros Form -- //
-
-const filtInputs = ['tipo', 'categoría', 'desde', 'ordenar-por'];
-const filtInputType = ['select', 'select', 'date', 'select'];
-const filtSelect = [['Todos', 'Gasto', 'Ganancia'], ['Más reciente', 'Menos reciente', 'Mayor monto', 'Menor monto', 'A/Z', 'Z/A']];
-
-formCreator(filtInputs, filtInputType, filtrosCard, filtSelect);
 
 
