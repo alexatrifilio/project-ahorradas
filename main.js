@@ -5,13 +5,15 @@ const body = document.body
 
 const header = document.createElement('header');
 header.setAttribute('class', 'bg-info');
-header.classList.add('bg-gradient', 'text-white', 'd-flex', 'justify-content-between', 'px-5', 'py-2');
+header.classList.add('bg-gradient', 'text-white', 'px-5', 'py-2');
 const navBar = document.createElement('nav');
-navBar.setAttribute('class', 'navbar');
+navBar.classList.add('navbar', 'navbar-expand-lg');
+const contFluid =document.createElement('div');
+contFluid.classList.add('container-fluid');
 const brand = document.createElement('a');
 brand.setAttribute('class', 'navbar-brand');
 brand.classList.add('d-flex', 'text-white')
-brand.setAttribute('href', '#');
+brand.setAttribute('href', './index.html');
 const hIcon = document.createElement('span');
 hIcon.setAttribute('class', 'material-symbols-outlined');
 hIcon.classList.add('brand')
@@ -21,16 +23,33 @@ brandName.classList.add('ms-3');
 brand.appendChild(hIcon);
 brandName.appendChild(document.createTextNode('AhorrADAs'));
 brand.appendChild(brandName);
-navBar.appendChild(brand);
+contFluid.appendChild(brand);
+navBar.appendChild(contFluid);
 header.appendChild(navBar)
 body.appendChild(header)
+
+    // ** Responsive toggler bttn ** //
+
+const toggler = document.createElement('button');
+toggler.classList.add('navbar-toggler');
+toggler.setAttribute('type', 'button');
+toggler.setAttribute('data-bs-toggle', 'collapse');
+toggler.setAttribute('data-bs-target', '#navbarToggler1');
+toggler.setAttribute('aria-controls', 'navbarToggler1');
+toggler.setAttribute('aria-expanded', 'false');
+toggler.setAttribute('aria-label', 'Toggle navigation')
+const togglerIcon = document.createElement('span');
+togglerIcon.classList.add('navbar-toggler-icon', 'material-symbols-outlined');
+togglerIcon.appendChild(document.createTextNode('menu'));
+toggler.appendChild(togglerIcon);
+contFluid.appendChild(toggler);
 
      // ** Header Buttons ** //
 
 const listContainer = document.createElement('div');
-listContainer.setAttribute('class', 'd-flex');
-listContainer.classList.add('list-nav');
-header.appendChild(listContainer);
+listContainer.classList.add('d-flex', 'justify-content-between', 'list-nav', 'collapse', 'navbar-collapse');
+listContainer.setAttribute('id', 'navbarToggler1');
+contFluid.appendChild(listContainer);
 const navList = document.createElement('ul');
 navList.setAttribute('class', 'navbar-nav');
 listContainer.appendChild(navList);
