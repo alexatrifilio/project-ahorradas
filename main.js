@@ -109,8 +109,15 @@ const cardCreator = (cardTitle, cardAppend) =>{
     firstCardRow.setAttribute('class', 'd-flex');
     firstCardRow.setAttribute('id', `${intCardTitle}-first-row`);
     const cTitle = document.createElement('h2');
-    const cardTitleText = document.createTextNode(cardTitle);
-    cTitle.appendChild(cardTitleText);
+    if(cardTitle.includes('-')){
+        const cardTitleNew = cardTitle.replace(/-/g,' ');
+        const cardTitleText = document.createTextNode(cardTitleNew);    
+        cTitle.appendChild(cardTitleText);
+    }else{
+
+        const cardTitleText = document.createTextNode(cardTitle);
+        cTitle.appendChild(cardTitleText);
+    }
     firstCardRow.appendChild(cTitle);
     card.appendChild(firstCardRow);
     cardAppend.appendChild(card);
@@ -232,46 +239,6 @@ function replaceData(data, tableName){
     appendData(data, tableName);
 }
 
-
-// ** Form Creator ** //
-
-const formCreator = (inputName, inputType, formAppend, selectOpt) => {
-    const form = document.createElement('form');
-    
-    for (const index in inputName){
-        const formItemCont = document.createElement('div');
-        formItemCont.classList.add('d-flex', 'flex-column');
-        const label = document.createElement('label');
-        label.setAttribute('for', `is-${inputName[index]}`);
-        label.appendChild(document.createTextNode(inputName[index]));
-        label.classList.add('mb-2');
-        if(inputType[index] === 'select'){
-            const select = document.createElement('select');
-            select.classList.add('mb-2');
-            for (let index in selectOpt){                  // Este loop está incluyendo TODAS las opciones dentro de todas las categorias en lugar de agregar cada una a un select. Los array que mandan la info estan en balance.js en la seccion de Card Filtros - Filtros form 
-                for (elem of selectOpt[index]){
-                    const option = document.createElement('option');
-                    option.appendChild(document.createTextNode(elem));
-                    select.appendChild(option);
-                }
-            }
-            formItemCont.appendChild(label);
-            formItemCont.appendChild(select);
-
-        } else{
-
-            const input = document.createElement('input');
-            input.classList.add('mb-2')
-            input.setAttribute('id', `is-${inputName[index]}`);
-            input.setAttribute('type', inputType[index]);
-            formItemCont.appendChild(label);
-            formItemCont.appendChild(input);
-        }
-        form.appendChild(formItemCont);         
-    }
-
-    formAppend.appendChild(form);
-}
 
   // -- Single row forms -- //
 
