@@ -5,16 +5,14 @@ a{
 }
 
 /***** HEADER *****/
-.navbar-nav{
-    flex-direction: row;
-}
 
-.list-nav{
-    align-items: center;
-}
 
 .material-symbols-outlined.brand{
     font-size: 45px;
+}
+.burger{
+    color: white;
+    font-size: 37px;
 }
 
 

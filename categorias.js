@@ -1,9 +1,18 @@
+// - Layout -- //
+
+const row = document.createElement('div');
+row.classList.add('row', 'justify-content-center');
+
+// - cols - //
+const col1 = document.createElement('div');
+col1.classList.add('col');
+row.appendChild(col1);
+mainContainer.appendChild(row);
+
 // --- CARD --- //
 
-cardCreator('Categorias', mainContainer);
+cardCreator('Categorias', col1);
 const categoriasCard = document.getElementById('categorias');
-
-
     // -- Form -- //
 
 singleRowForm('categorias-form', categoriasCard, 'Agregar');
