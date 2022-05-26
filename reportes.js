@@ -7,6 +7,7 @@ reportesCard.appendChild(cont);
 
 // - Sections - //
 
+
 const reportsSections = (sections) => {
     let i = 1
     sections.forEach((title)=>{
@@ -35,7 +36,6 @@ const maxIncome = () =>{
             return op
         }
     })
-
     for (let elem of income){
             if(parseInt(elem.amount) > acc){
                 acc = parseInt(elem.amount)
@@ -52,12 +52,13 @@ const maxIncome = () =>{
 const maxExpense = () =>{
     const ls = JSON.parse(localStorage.getItem('ahorradas-data'));
     const lsOps = ls.operations;
-    let acc = parseInt(lsOps[1].amount);
+    let acc = 0;
     const expense = lsOps.filter(op => {
         if(op.type === 'Gasto'){
             return op
         }
     })
+
 
     for (let elem of expense){
             if(parseInt(elem.amount) > acc){
@@ -134,20 +135,26 @@ const totalCatTbody = document.createElement('tbody');
 const lStore = JSON.parse(localStorage.getItem('ahorradas-data'));
 const lStoreCat = lStore.categories;
 
-
+lStore.operations.forEach((op)=>{
+    const opDate = new Date (op.date);
+    console.log(opDate)
+ })
 
 
 
 for(let cat of lStoreCat){
-
+    const activeCats = [];
     const objCat = [];
     const amountsInc = []; 
     const amountsExp =[];
 
     lStore.operations.forEach((obj)=>{
-
+        if(parseInt(obj.amount) > 0){
+            activeCats.push(obj.category)
+        }
         if(obj.category === cat.cat){
-            objCat.push(obj)
+
+                objCat.push(obj)
         }    
     })
 
@@ -173,23 +180,35 @@ for(let cat of lStoreCat){
 
     const balance = () => {return `$${totalInc - totalExp}`};
 
+    
+    
     const tr = document.createElement('tr');
-    const cell1 = document.createElement('td');
-    cell1.appendChild(document.createTextNode(cat.cat));
-    const cell2 = document.createElement('td');
-    cell2.appendChild(document.createTextNode(totalInc));
-    cell2.classList.add('income');    
-    const cell3 = document.createElement('td');
-    cell3.appendChild(document.createTextNode(totalExp));
-    cell3.classList.add('expense');  
-    const cell4 = document.createElement('td');
-    cell4.appendChild(document.createTextNode(balance()));
+    let uniqueCats = [];
 
-    tr.appendChild(cell1);
-    tr.appendChild(cell2);
-    tr.appendChild(cell3);
-    tr.appendChild(cell4);
-    totalCatTbody.appendChild(tr)
+    for (elem of objCat){
+            if(!uniqueCats.includes(elem.category)){
+                uniqueCats.push(elem.category);
+            }
+        }
+    for(elem of uniqueCats){            
+        const cell1 = document.createElement('td');
+
+        cell1.appendChild(document.createTextNode(elem));
+        const cell2 = document.createElement('td');
+        cell2.appendChild(document.createTextNode(totalInc));
+        cell2.classList.add('income');    
+        const cell3 = document.createElement('td');
+        cell3.appendChild(document.createTextNode(totalExp));
+        cell3.classList.add('expense');  
+        const cell4 = document.createElement('td');
+        cell4.appendChild(document.createTextNode(balance()));
+        tr.appendChild(cell1);
+        
+        tr.appendChild(cell2);
+        tr.appendChild(cell3);
+        tr.appendChild(cell4);
+        totalCatTbody.appendChild(tr)
+    }
 };
 
 
@@ -199,9 +218,7 @@ totalCatSection.appendChild(totalCatTable);
 
 // - Totales por mes - //
 
-lStore.operations.forEach((op)=>{
-   
-})
+
 
 
 
