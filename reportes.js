@@ -5,6 +5,9 @@ const reportesCard = document.getElementById('reportes');
 const cont = document.createElement('div');
 reportesCard.appendChild(cont);
 
+const lStore = JSON.parse(localStorage.getItem('ahorradas-data'));
+const transactions = lStore.operations;
+
 // - Sections - //
 
 
@@ -21,10 +24,33 @@ const reportsSections = (sections) => {
     })
 }
 
+// - Card with no reports - //
+
+const noReportsImage = () =>{
+    const opImg = document.createElement('img');
+    const opImgCont = document.createElement('div');
+    opImgCont.classList.add('d-flex', 'align-items-center', 'flex-column');
+    opImg.setAttribute('src', './assets/reportsimg.png');
+    opImg.classList.add('op-img');
+    const opSubtitle = document.createElement('h3');
+    opSubtitle.appendChild(document.createTextNode('Operaciones insuficientes'));
+    const opParagraph = document.createElement('p');
+    opParagraph.appendChild(document.createTextNode('Prueba agregando más operaciones.'))
+    opImgCont.appendChild(opImg);
+    opImgCont.appendChild(opSubtitle);
+    opImgCont.appendChild(opParagraph);
+    reportesCard.appendChild(opImgCont);
+}  
+
+
 const sections = ['Resumen', 'Totales por categorías', 'Totales por mes'];
 
-reportsSections(sections);
+if (transactions.length === 0){
+    noReportsImage();
+}else{
 
+reportsSections(sections);
+}
 // - operations - //
 
 const maxIncome = () =>{
@@ -174,7 +200,7 @@ ths.forEach((th)=>{
 })
 
 const totalCatTbody = document.createElement('tbody');
-const lStore = JSON.parse(localStorage.getItem('ahorradas-data'));
+
 const lStoreCat = lStore.categories;
 
 
