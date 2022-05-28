@@ -135,10 +135,6 @@ const totalCatTbody = document.createElement('tbody');
 const lStore = JSON.parse(localStorage.getItem('ahorradas-data'));
 const lStoreCat = lStore.categories;
 
-lStore.operations.forEach((op)=>{
-    const opDate = new Date (op.date);
-    console.log(opDate)
- })
 
 
 
@@ -150,7 +146,7 @@ for(let cat of lStoreCat){
 
     lStore.operations.forEach((obj)=>{
         if(parseInt(obj.amount) > 0){
-            activeCats.push(obj.category)
+            activeCats.push(obj.category) //Creo que lo puedo sacar, miedo tocar
         }
         if(obj.category === cat.cat){
 
@@ -218,8 +214,94 @@ totalCatSection.appendChild(totalCatTable);
 
 // - Totales por mes - //
 
+const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+const opsByMonth = {};
+
+
+const opsByDate = lStore.operations.forEach((op)=>{
+    const opDate = new Date (op.date);
+   
+    opsByMonth[months[opDate.getMonth()]] = []
 
 
 
+ })
 
+ const pushOpsByDate = lStore.operations.forEach((op)=>{
+    const opDate = new Date (op.date);
+
+    
+    opsByMonth[months[opDate.getMonth()]].push(op)
+
+
+ })
+
+
+
+ const totalMonthSection = document.getElementById('is-section-3');
+
+ const totalMonthTable = document.createElement('table');
+ totalMonthTable.classList.add('table', 'table-borderless'); 
+ const totalMonthThead = document.createElement('thead');
+ const monthTheadtr = document.createElement('tr');
+ totalMonthThead.appendChild(monthTheadtr);
+ const monthColNames = ['Mes', 'Ganancias', 'Gastos', 'Balance'];
+ monthColNames.forEach((th)=>{
+    const totalMonthth = document.createElement('th');
+    totalMonthth.appendChild(document.createTextNode(th))
+    monthTheadtr.appendChild(totalMonthth);
+})
+const totalMonthTbody = document.createElement('tbody');
+
+
+
+ for (let month in opsByMonth){
+    const incByMonth = [];
+    const expByMonth = [];
+    let totalByMonth = 0;
+    const property = month;
+    const {[property]: monthName} = opsByMonth;
+    for(let elem of monthName){
+        if(elem.type === 'Ingreso'){
+            incByMonth.push(parseInt(elem.amount))
+        } else if(elem.type === 'Gasto'){
+            expByMonth.push(parseInt(elem.amount))
+        }
+    }
+    const totalIncMonth = incByMonth.reduce((acc, current) =>{
+        return acc + current
+    }, 0)
+    const totalExpMonth = expByMonth.reduce((acc, current) =>{
+        return acc + current
+    }, 0)
+
+    totalByMonth = totalIncMonth - totalExpMonth;
+    
+    const monthRow = document.createElement('tr');
+    const cell1 = document.createElement('td');
+    cell1.appendChild(document.createTextNode(month));
+    const cell2 = document.createElement('td');
+    cell2.appendChild(document.createTextNode(totalIncMonth));
+    cell2.classList.add('income');
+    const cell3 = document.createElement('td');
+    cell3.appendChild(document.createTextNode(totalExpMonth));
+    cell3.classList.add('expense');
+    const cell4 = document.createElement('td');
+    cell4.appendChild(document.createTextNode(`$${totalByMonth}`));
+
+
+    totalMonthTbody.appendChild(monthRow)
+    monthRow.appendChild(cell1);
+    monthRow.appendChild(cell2);
+    monthRow.appendChild(cell3);
+    monthRow.appendChild(cell4);
+
+
+ }
+
+
+totalMonthTable.appendChild(totalMonthThead);
+totalMonthTable.appendChild(totalMonthTbody);
+totalMonthSection.appendChild(totalMonthTable);
 
