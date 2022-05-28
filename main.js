@@ -5,13 +5,15 @@ const body = document.body
 
 const header = document.createElement('header');
 header.setAttribute('class', 'bg-info');
-header.classList.add('bg-gradient', 'text-white', 'd-flex', 'justify-content-between', 'px-5', 'py-2');
+header.classList.add('bg-gradient', 'text-white', 'px-5', 'py-2');
 const navBar = document.createElement('nav');
-navBar.setAttribute('class', 'navbar');
+navBar.classList.add('navbar', 'navbar-expand-lg');
+const contFluid =document.createElement('div');
+contFluid.classList.add('container-fluid','d-flex', 'list-nav');
 const brand = document.createElement('a');
 brand.setAttribute('class', 'navbar-brand');
-brand.classList.add('d-flex', 'text-white')
-brand.setAttribute('href', '#');
+brand.classList.add('d-flex', 'text-white', 'me-auto')
+brand.setAttribute('href', './index.html');
 const hIcon = document.createElement('span');
 hIcon.setAttribute('class', 'material-symbols-outlined');
 hIcon.classList.add('brand')
@@ -21,18 +23,39 @@ brandName.classList.add('ms-3');
 brand.appendChild(hIcon);
 brandName.appendChild(document.createTextNode('AhorrADAs'));
 brand.appendChild(brandName);
-navBar.appendChild(brand);
+contFluid.appendChild(brand);
+navBar.appendChild(contFluid);
 header.appendChild(navBar)
 body.appendChild(header)
+
+    // ** Responsive toggler bttn ** //
+
+const toggler = document.createElement('button');
+toggler.classList.add('navbar-toggler');
+toggler.setAttribute('type', 'button');
+toggler.setAttribute('data-bs-toggle', "collapse");
+toggler.setAttribute('data-bs-target', '#navbarToggler1');
+toggler.setAttribute('aria-controls', 'navbarToggler1');
+toggler.setAttribute('aria-expanded', 'false');
+toggler.setAttribute('aria-label', 'Toggle navigation')
+const togglerIcon = document.createElement('span');
+togglerIcon.classList.add('navbar-toggler-icon', 'material-symbols-outlined', 'burger');
+togglerIcon.appendChild(document.createTextNode('menu'));
+toggler.appendChild(togglerIcon);
+contFluid.appendChild(toggler);
+
+// toggler.addEventListener('click',(e)=>{
+//     listContainer.classList.toggle("collapse")
+// })
 
      // ** Header Buttons ** //
 
 const listContainer = document.createElement('div');
-listContainer.setAttribute('class', 'd-flex');
-listContainer.classList.add('list-nav');
-header.appendChild(listContainer);
+listContainer.classList.add('collapse','navbar-collapse', 'justify-content-end');
+listContainer.setAttribute('id', 'navbarToggler1');
+contFluid.appendChild(listContainer);
 const navList = document.createElement('ul');
-navList.setAttribute('class', 'navbar-nav');
+navList.classList.add('navbar-nav', 'd-flex','justify-content-end');
 listContainer.appendChild(navList);
 
 
@@ -215,46 +238,13 @@ function appendData(data, tableName){
     
 }
 
-
-// ** Form Creator ** //
-
-const formCreator = (inputName, inputType, formAppend, selectOpt) => {
-    const form = document.createElement('form');
-    
-    for (const index in inputName){
-        const formItemCont = document.createElement('div');
-        formItemCont.classList.add('d-flex', 'flex-column');
-        const label = document.createElement('label');
-        label.setAttribute('for', `is-${inputName[index]}`);
-        label.appendChild(document.createTextNode(inputName[index]));
-        label.classList.add('mb-2');
-        if(inputType[index] === 'select'){
-            const select = document.createElement('select');
-            select.classList.add('mb-2');
-            for (let index in selectOpt){                  // Este loop está incluyendo TODAS las opciones dentro de todas las categorias en lugar de agregar cada una a un select. Los array que mandan la info estan en balance.js en la seccion de Card Filtros - Filtros form 
-                for (elem of selectOpt[index]){
-                    const option = document.createElement('option');
-                    option.appendChild(document.createTextNode(elem));
-                    select.appendChild(option);
-                }
-            }
-            formItemCont.appendChild(label);
-            formItemCont.appendChild(select);
-
-        } else{
-
-            const input = document.createElement('input');
-            input.classList.add('mb-2')
-            input.setAttribute('id', `is-${inputName[index]}`);
-            input.setAttribute('type', inputType[index]);
-            formItemCont.appendChild(label);
-            formItemCont.appendChild(input);
-        }
-        form.appendChild(formItemCont);         
-    }
-
-    formAppend.appendChild(form);
+function replaceData(data, tableName){
+    const table = document.getElementById(tableName);
+    let tbody = table.querySelector('tbody');
+    tbody.innerHTML = "";
+    appendData(data, tableName);
 }
+
 
   // -- Single row forms -- //
 
@@ -288,4 +278,53 @@ const formCreator = (inputName, inputType, formAppend, selectOpt) => {
     col2.appendChild(catFormBttn);
     
     formAppend.appendChild(singleRowForm);
+}
+
+// -- input field creator --//
+
+function createInputField(formId, type, name, fielTitle, placeholder, required){
+    const form = document.getElementById(formId);
+    const inputContainer =  document.createElement('div');
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+
+    inputContainer.classList.add('d-flex', 'flex-column', 'mb-3')
+    label.setAttribute('for', fielTitle);
+    label.appendChild(document.createTextNode(fielTitle));
+    label.classList.add('mb-1');
+    input.setAttribute('type', type);
+    input.setAttribute('name', name);
+    input.setAttribute('placeholder', placeholder);
+    input.setAttribute('required', required);
+    input.setAttribute('id', `input-${name}`);
+    inputContainer.appendChild(label);
+    inputContainer.appendChild(input);
+    form.appendChild(inputContainer)
+}
+
+// -- Select field creator --//
+
+function createSelectField(formId, name, fieldTitle, options){
+    const form = document.getElementById(formId);
+    const selectContainer = document.createElement('div');
+    const label = document.createElement('label');
+    const select = document.createElement('select');
+    const option = document.createElement('option');
+
+    selectContainer.classList.add('d-flex', 'flex-column', 'mb-3')
+    label.setAttribute('for', fieldTitle);
+    label.classList.add('mb-1');
+    label.appendChild(document.createTextNode(fieldTitle));
+    select.setAttribute('name', name);
+    option.appendChild(document.createTextNode('Seleccione una opción'));
+    select.appendChild(option);
+    select.setAttribute('id', `select-${name}`);
+    for (let i in options){
+        const option = document.createElement('option');
+        option.appendChild(document.createTextNode(options[i]));
+        select.appendChild(option);
+    }
+    selectContainer.appendChild(label);
+    selectContainer.appendChild(select);
+    form.appendChild(selectContainer)
 }

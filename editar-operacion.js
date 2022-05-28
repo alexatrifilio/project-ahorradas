@@ -71,11 +71,11 @@ const loadCategories = cat => {
 }
 loadCategories(categories)
 
-createInputField('editar-operacion-form', 'text', 'description', '', true);
-createInputField('editar-operacion-form', 'number', 'amount', '', true);
-createSelectField('editar-operacion-form', 'type', ['Ingreso', 'Gasto']);
-createSelectField('editar-operacion-form', 'category', formCategories);
-createInputField('editar-operacion-form', 'date', 'date', '', true);
+createInputField('editar-operacion-form', 'text', 'descripcion', '', true);
+createInputField('editar-operacion-form', 'number', 'monto', '', true);
+createSelectField('editar-operacion-form', 'tipo', ['Ingreso', 'Gasto']);
+createSelectField('editar-operacion-form', 'categoria', formCategories);
+createInputField('editar-operacion-form', 'date', 'fecha', '', true);
 
 
 
@@ -104,11 +104,11 @@ const data = ops.find(op => op.id === id);
 
 
 
-document.getElementById('input-description').value = data.description;
-document.getElementById('input-amount').value = data.amount;
-document.getElementById('select-type').value = data.type;
-document.getElementById('select-category').value = data.category;
-document.getElementById('input-date').value = data.date;
+document.getElementById('input-descripcion').value = data.description;
+document.getElementById('input-monto').value = data.amount;
+document.getElementById('select-tipo').value = data.type;
+document.getElementById('select-categoria').value = data.category;
+document.getElementById('input-fecha').value = data.date;
 
 
 
@@ -118,11 +118,11 @@ editOpForm.addEventListener('submit', e => {
 
     const payload = {
         id: id,
-        description: e.target.querySelector('#input-description').value,
-        category: e.target.querySelector('#select-category').value,
-        date: e.target.querySelector('#input-date').value,
-        amount: e.target.querySelector('#input-amount').value,
-        type: e.target.querySelector('#select-type').value,
+        description: e.target.querySelector('#input-descripcion').value,
+        category: e.target.querySelector('#select-categoria').value,
+        date: e.target.querySelector('#input-fecha').value,
+        amount: e.target.querySelector('#input-monto').value,
+        type: e.target.querySelector('#select-tipo').value,
     }
 
     const editedOps = lS.operations.map(item => {

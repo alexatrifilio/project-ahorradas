@@ -5,9 +5,15 @@ row.classList.add('row','row-cols-2');
 
     // - cols - //
 const col1 = document.createElement('div');
+<<<<<<< HEAD
 col1.classList.add('col-3');
 const col2 = document.createElement('div');
 col2.classList.add('col-8');
+=======
+col1.classList.add('col-12', 'col-lg-3');
+const col2 = document.createElement('div');
+col2.classList.add('col-12', 'col-lg-8');
+>>>>>>> main
 row.appendChild(col1);
 row.appendChild(col2);
 mainContainer.appendChild(row);
@@ -90,24 +96,7 @@ const balanceTbCreator = ()=>{
 
 balanceTbCreator(balance);
 
-//--- Card Filtros ---//
 
-cardCreator('Filtros', col1);
-const filtrosCard = document.getElementById('filtros');
-const filtFirstRow = document.getElementById('filtros-first-row');
-filtFirstRow.classList.add('justify-content-between');
-const hideFilters = document.createElement('a');
-hideFilters.setAttribute('href', '#');
-hideFilters.classList.add('d-inline-block');
-hideFilters.appendChild(document.createTextNode('Ocultar filtros'));
-filtFirstRow.appendChild(hideFilters);
 
-    // -- Filtros Form -- //
-
-const filtInputs = ['tipo', 'categoría', 'desde', 'ordenar-por'];
-const filtInputType = ['select', 'select', 'date', 'select'];
-const filtSelect = [['Todos', 'Gasto', 'Ganancia'], ['Más reciente', 'Menos reciente', 'Mayor monto', 'Menor monto', 'A/Z', 'Z/A']];
-
-formCreator(filtInputs, filtInputType, filtrosCard, filtSelect);
 
 
