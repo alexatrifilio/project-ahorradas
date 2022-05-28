@@ -36,7 +36,7 @@ const showCategories = () => {
             col2.classList.add('col', 'col-3', 'd-flex','align-items-center');
             let span = document.createElement('span');
             span.appendChild(document.createTextNode(newCat));
-            span.classList.add('d-inline-block','bg-info', 'bg-opacity-50', 'p-1');
+            span.classList.add('d-inline-block','bg-info', 'bg-opacity-25', 'p-1', 's-tag');
             col1.appendChild(span);
             let editar = document.createElement('a');
             editar.setAttribute('href', `./editar-categoria.html?id=${cat.id}`);

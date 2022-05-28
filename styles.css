@@ -4,6 +4,10 @@ a{
     text-decoration: none;
 }
 
+.cards{
+    max-width: 750px;
+}
+
 /***** HEADER *****/
 
 
@@ -15,6 +19,7 @@ a{
     font-size: 37px;
 }
 
+/***** BALANCE LAYOUT *****/
 
 /***** BALANCE CARD *****/
 .val-ganancias{
@@ -50,12 +55,18 @@ a{
     content: '+$';
 }
 
+.balance::before{
+    content: '$';
+}
+
 .s-link{
     font-size: 0.9rem;
 }
 
 /***** CATEGORIAS CARD *****/
 
-#categorias{
-    max-width: 750px;
+.s-tag{
+    font-size: 0.8rem;
+    color: rgb(0, 129, 250);
+    border-radius: 5px;
 }

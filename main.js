@@ -90,8 +90,8 @@ navItemCreator('pie_chart', 'Reportes', './reportes.html');
 const main = document.createElement('main');
 body.appendChild(main);
 const mainContainer = document.createElement('div');
-mainContainer.setAttribute('class', 'container');
-mainContainer.classList.add('pt-5');
+mainContainer.setAttribute('id', 'main-cont');
+mainContainer.classList.add('container','pt-5');
 main.appendChild(mainContainer);
 
 
@@ -101,10 +101,10 @@ main.appendChild(mainContainer);
 
 const cardCreator = (cardTitle, cardAppend) =>{
     const card = document.createElement('div');
-    let intCardTitle = cardTitle.toLowerCase();
+    const intCardTitle = cardTitle.toLowerCase();
     card.setAttribute('class','card');
     card.setAttribute('id', intCardTitle);
-    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded');
+    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded', 'cards');
     const firstCardRow = document.createElement('div');
     firstCardRow.setAttribute('class', 'd-flex');
     firstCardRow.setAttribute('id', `${intCardTitle}-first-row`);
@@ -162,8 +162,8 @@ function appendData(data, tableName){
         const tr = document.createElement('tr');
         tbody.appendChild(tr);
         for(i in obj){
-            if(i === 'type' || i === 'id'){continue}  
-            var td = document.createElement('td');
+            if(i === 'type' || i === 'id'){continue}
+            let td = document.createElement('td');
             if(obj.type === 'Gasto'){
                 if(obj[i] > 0){
                     td.classList.add('expense');
@@ -173,7 +173,13 @@ function appendData(data, tableName){
                     td.classList.add('income');
                 }
             }
-            td.appendChild(document.createTextNode(obj[i]));
+            if(i === 'category'){
+                const span = document.createElement('span');
+                span.classList.add('d-inline-block','bg-info', 'bg-opacity-25', 'p-1', 's-tag');
+                span.appendChild(document.createTextNode(obj[i]));
+                td.appendChild(span);
+            } else{td.appendChild(document.createTextNode(obj[i]));}
+            
             tr.appendChild(td);
         }
         const tdLinks = document.createElement('td');
