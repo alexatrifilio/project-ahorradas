@@ -153,7 +153,7 @@ const rowCreator = (elem, obj, elemClass, type) => {
 
 rowCreator('Categoría con mayor ganancia', maxIncome(), 'income', 'cat');
 rowCreator('Categoría con mayor gasto', maxExpense(), 'expense', 'cat');
-rowCreator('Categoría con mayor ganancia', bestBalance(), 'balance','cat');
+rowCreator('Categoría con mayor balance', bestBalance(), 'balance','cat');
 //las otras row las creo más abajo en la sección de totales por mes.
 
 
