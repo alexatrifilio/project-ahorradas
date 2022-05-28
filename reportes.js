@@ -108,12 +108,15 @@ const rowCreator = (elem, obj, elemClass, type) => {
     tBody.appendChild(tr);
 }
 
+// - para calcular por mes - //
+
+
 rowCreator('Categoría con mayor ganancia', maxIncome(), 'income', 'cat');
 rowCreator('Categoría con mayor gasto', maxExpense(), 'expense', 'cat');
 // Los de mes están mal pq debería ser la comparación de los totales por mes, el de categoria con mejor balance no lo entiendo!!
 // rowCreator('Categoría con mayor ganancia', maxIncome(), 'income');
-rowCreator('Mes con mayor ganancia', maxIncome(), 'income', 'date');
-rowCreator('Mes con mayor gasto', maxExpense(), 'expense', 'date');
+
+
 
 // - Totales por categoría - //
 
@@ -236,6 +239,64 @@ const opsByDate = lStore.operations.forEach((op)=>{
 
 
  })
+
+ const maxByMonth = ()=> {
+     let maxMonth ={};
+     let maxIncome = 0;
+    for (let month in opsByMonth){
+        const incByMonth = [];
+        let maxIncByMonth = 0;
+        const property = month;
+        const {[property]: monthName} = opsByMonth;
+        for(let elem of monthName){
+            if(elem.type === 'Ingreso'){
+                incByMonth.push(parseInt(elem.amount))
+                if(parseInt(elem.amount) > maxIncByMonth){
+                    maxIncByMonth = parseInt(elem.amount);
+                }
+            }
+            if(maxIncByMonth > maxIncome){
+                maxIncome = maxIncByMonth;
+            }
+            if(parseInt(elem.amount) === maxIncome){
+                maxMonth = elem;
+            }
+             
+        }
+    } 
+    return maxMonth
+ }
+
+ const minByMonth = ()=> {
+    let minMonth ={};
+    let maxExpense = 0;
+   for (let month in opsByMonth){
+       const expByMonth = [];
+       let maxExpByMonth = 0;
+       const property = month;
+       const {[property]: monthName} = opsByMonth;
+       for(let elem of monthName){
+           if(elem.type === 'Gasto'){
+               expByMonth.push(parseInt(elem.amount))
+               if(parseInt(elem.amount) > maxExpByMonth){
+                   console.log(elem.amount);
+                   maxExpByMonth = parseInt(elem.amount);
+               }
+           }
+           if(maxExpByMonth > maxExpense){
+               maxExpense = maxExpByMonth;
+           }
+           if(parseInt(elem.amount) === maxExpense){
+               minMonth = elem;
+           }
+            
+       }
+   } 
+   return minMonth
+}
+
+ rowCreator('Mes con mayor ganancia', maxByMonth(), 'income', 'date');
+ rowCreator('Mes con mayor gasto', minByMonth(), 'expense', 'date');
 
 
 
