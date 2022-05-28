@@ -57,6 +57,10 @@ a{
     content: '+$';
 }
 
+.balance::before{
+    content: '$';
+}
+
 .s-link{
     font-size: 0.9rem;
 }
