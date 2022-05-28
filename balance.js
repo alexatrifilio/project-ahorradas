@@ -5,15 +5,9 @@ row.classList.add('row','row-cols-2');
 
     // - cols - //
 const col1 = document.createElement('div');
-<<<<<<< HEAD
-col1.classList.add('col-3');
-const col2 = document.createElement('div');
-col2.classList.add('col-8');
-=======
 col1.classList.add('col-12', 'col-lg-3');
 const col2 = document.createElement('div');
 col2.classList.add('col-12', 'col-lg-8');
->>>>>>> main
 row.appendChild(col1);
 row.appendChild(col2);
 mainContainer.appendChild(row);
