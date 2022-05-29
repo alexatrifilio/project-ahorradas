@@ -64,22 +64,44 @@ function filterTableByDate(selectedFilter, selectedValue, table) {
     return filteredTable;
 }
 
-function orderTableByDate(selectedFilter, selectedValue, table){
-    let orderedTable = [];
-    if (selectedValue=="Más reciente")
-        orderedTable = table.sort((a, b) => (a[selectedFilter] < b[selectedFilter]) ? 1 : -1);
-    if (selectedValue=="Menos reciente")
-        orderedTable = table.sort((a, b) => (a[selectedFilter] > b[selectedFilter]) ? 1 : -1);
-    return orderedTable;
-}
 
-function orderTableByAmount(selectedFilter, selectedValue, table){
-    let orderedTable = [];
-    if (selectedValue=="Mayor monto")
-        orderedTable = table.sort((a, b) => (a[selectedFilter] < b[selectedFilter]) ? 1 : -1);
-    if (selectedValue=="Menor monto")
-        orderedTable = table.sort((a, b) => (a[selectedFilter] > b[selectedFilter]) ? 1 : -1);
-    return orderedTable;
+function orderTable(table, orderBy){
+    let sortedTable = [];
+    if (orderBy=="Seleccione una opción"){
+        sortedTable = table
+    }
+    else if (orderBy=="Más reciente"){
+        sortedTable = table.sort(function(a, b){
+            return new Date(b['date']) - new Date(a['date']);
+        });
+    }
+    else if (orderBy=="Menos reciente"){
+        sortedTable = table.sort(function(a, b){
+            return new Date(a['date']) - new Date(b['date']);
+        });
+    }
+    else if (orderBy=="Mayor monto"){
+        sortedTable = table.sort(function(a, b){
+            console.log(a['ammount'], b['ammount']);
+            return b['amount'] - a['amount'];
+        });
+    }
+    else if (orderBy=="Menor monto"){
+        sortedTable = table.sort(function(a, b){
+            return a['amount'] - b['amount'];
+        });
+    }
+    else if (orderBy=="A/Z"){
+        sortedTable = table.sort(function(a, b){
+            return a['description'].localeCompare(b['description']);
+        });
+    }
+    else if (orderBy=="Z/A"){
+        sortedTable = table.sort(function(a, b){
+            return b['description'].localeCompare(a['description']);
+        });
+    }
+    return sortedTable;
 }
 
 
@@ -90,13 +112,11 @@ form.addEventListener('change', function(e){
     let categoryValue = document.getElementById('select-category');
     let dateValue = document.getElementById('input-date');
     let orderByValue = document.getElementById('select-orderBy');
-    console.log(dateValue.value);
-    let transactionsFiltered = filterTable('type', typeValue.value, data['operations']);
-    transactionsFiltered = filterTable('category', categoryValue.value, transactionsFiltered);
-    transactionsFiltered = filterTableByDate('date', dateValue.value, transactionsFiltered);
-    let transactionsOrdered = orderTableByDate('date', orderByValue.value, transactionsFiltered);
-    //console.log(orderTableByAmount('amount', orderByValue.value, transactionsOrdered));
-    replaceData(transactionsOrdered, 'transactions');
+    let transactionsResult = filterTable('type', typeValue.value, data['operations']);
+    transactionsResult = filterTable('category', categoryValue.value, transactionsResult);
+    transactionsResult = filterTableByDate('date', dateValue.value, transactionsResult);
+    transactionsResult = orderTable(transactionsResult, orderByValue.value);
+    replaceData(transactionsResult, 'transactions');
 });
 
 // hide filters
