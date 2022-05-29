@@ -5,13 +5,15 @@ const body = document.body
 
 const header = document.createElement('header');
 header.setAttribute('class', 'bg-info');
-header.classList.add('bg-gradient', 'text-white', 'd-flex', 'justify-content-between', 'px-5', 'py-2');
+header.classList.add('bg-gradient', 'text-white', 'px-5', 'py-2');
 const navBar = document.createElement('nav');
-navBar.setAttribute('class', 'navbar');
+navBar.classList.add('navbar', 'navbar-expand-lg');
+const contFluid =document.createElement('div');
+contFluid.classList.add('container-fluid','d-flex', 'list-nav');
 const brand = document.createElement('a');
 brand.setAttribute('class', 'navbar-brand');
-brand.classList.add('d-flex', 'text-white')
-brand.setAttribute('href', '#');
+brand.classList.add('d-flex', 'text-white', 'me-auto')
+brand.setAttribute('href', './index.html');
 const hIcon = document.createElement('span');
 hIcon.setAttribute('class', 'material-symbols-outlined');
 hIcon.classList.add('brand')
@@ -21,18 +23,39 @@ brandName.classList.add('ms-3');
 brand.appendChild(hIcon);
 brandName.appendChild(document.createTextNode('AhorrADAs'));
 brand.appendChild(brandName);
-navBar.appendChild(brand);
+contFluid.appendChild(brand);
+navBar.appendChild(contFluid);
 header.appendChild(navBar)
 body.appendChild(header)
+
+    // ** Responsive toggler bttn ** //
+
+const toggler = document.createElement('button');
+toggler.classList.add('navbar-toggler');
+toggler.setAttribute('type', 'button');
+toggler.setAttribute('data-bs-toggle', "collapse");
+toggler.setAttribute('data-bs-target', '#navbarToggler1');
+toggler.setAttribute('aria-controls', 'navbarToggler1');
+toggler.setAttribute('aria-expanded', 'false');
+toggler.setAttribute('aria-label', 'Toggle navigation')
+const togglerIcon = document.createElement('span');
+togglerIcon.classList.add('navbar-toggler-icon', 'material-symbols-outlined', 'burger');
+togglerIcon.appendChild(document.createTextNode('menu'));
+toggler.appendChild(togglerIcon);
+contFluid.appendChild(toggler);
+
+// toggler.addEventListener('click',(e)=>{
+//     listContainer.classList.toggle("collapse")
+// })
 
      // ** Header Buttons ** //
 
 const listContainer = document.createElement('div');
-listContainer.setAttribute('class', 'd-flex');
-listContainer.classList.add('list-nav');
-header.appendChild(listContainer);
+listContainer.classList.add('collapse','navbar-collapse', 'justify-content-end');
+listContainer.setAttribute('id', 'navbarToggler1');
+contFluid.appendChild(listContainer);
 const navList = document.createElement('ul');
-navList.setAttribute('class', 'navbar-nav');
+navList.classList.add('navbar-nav', 'd-flex','justify-content-end');
 listContainer.appendChild(navList);
 
 
@@ -67,8 +90,8 @@ navItemCreator('pie_chart', 'Reportes', './reportes.html');
 const main = document.createElement('main');
 body.appendChild(main);
 const mainContainer = document.createElement('div');
-mainContainer.setAttribute('class', 'container');
-mainContainer.classList.add('pt-5');
+mainContainer.setAttribute('id', 'main-cont');
+mainContainer.classList.add('container','pt-5');
 main.appendChild(mainContainer);
 
 
@@ -78,16 +101,23 @@ main.appendChild(mainContainer);
 
 const cardCreator = (cardTitle, cardAppend) =>{
     const card = document.createElement('div');
-    let intCardTitle = cardTitle.toLowerCase();
+    const intCardTitle = cardTitle.toLowerCase();
     card.setAttribute('class','card');
     card.setAttribute('id', intCardTitle);
-    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded');
+    card.classList.add('mb-4', 'p-4','shadow', 'p-3', 'mb-5', 'bg-body', 'rounded', 'cards');
     const firstCardRow = document.createElement('div');
     firstCardRow.setAttribute('class', 'd-flex');
     firstCardRow.setAttribute('id', `${intCardTitle}-first-row`);
     const cTitle = document.createElement('h2');
-    const cardTitleText = document.createTextNode(cardTitle);
-    cTitle.appendChild(cardTitleText);
+    if(cardTitle.includes('-')){
+        const cardTitleNew = cardTitle.replace(/-/g,' ');
+        const cardTitleText = document.createTextNode(cardTitleNew);    
+        cTitle.appendChild(cardTitleText);
+    }else{
+
+        const cardTitleText = document.createTextNode(cardTitle);
+        cTitle.appendChild(cardTitleText);
+    }
     firstCardRow.appendChild(cTitle);
     card.appendChild(firstCardRow);
     cardAppend.appendChild(card);
@@ -132,8 +162,8 @@ function appendData(data, tableName){
         const tr = document.createElement('tr');
         tbody.appendChild(tr);
         for(i in obj){
-            if(i === 'type' || i === 'id'){continue}  
-            var td = document.createElement('td');
+            if(i === 'type' || i === 'id'){continue}
+            let td = document.createElement('td');
             if(obj.type === 'Gasto'){
                 if(obj[i] > 0){
                     td.classList.add('expense');
@@ -143,7 +173,13 @@ function appendData(data, tableName){
                     td.classList.add('income');
                 }
             }
-            td.appendChild(document.createTextNode(obj[i]));
+            if(i === 'category'){
+                const span = document.createElement('span');
+                span.classList.add('d-inline-block','bg-info', 'bg-opacity-25', 'p-1', 's-tag');
+                span.appendChild(document.createTextNode(obj[i]));
+                td.appendChild(span);
+            } else{td.appendChild(document.createTextNode(obj[i]));}
+            
             tr.appendChild(td);
         }
         const tdLinks = document.createElement('td');
@@ -209,46 +245,6 @@ function replaceData(data, tableName){
     appendData(data, tableName);
 }
 
-
-// ** Form Creator ** //
-
-const formCreator = (inputName, inputType, formAppend, selectOpt) => {
-    const form = document.createElement('form');
-    
-    for (const index in inputName){
-        const formItemCont = document.createElement('div');
-        formItemCont.classList.add('d-flex', 'flex-column');
-        const label = document.createElement('label');
-        label.setAttribute('for', `is-${inputName[index]}`);
-        label.appendChild(document.createTextNode(inputName[index]));
-        label.classList.add('mb-2');
-        if(inputType[index] === 'select'){
-            const select = document.createElement('select');
-            select.classList.add('mb-2');
-            for (let index in selectOpt){                  // Este loop está incluyendo TODAS las opciones dentro de todas las categorias en lugar de agregar cada una a un select. Los array que mandan la info estan en balance.js en la seccion de Card Filtros - Filtros form 
-                for (elem of selectOpt[index]){
-                    const option = document.createElement('option');
-                    option.appendChild(document.createTextNode(elem));
-                    select.appendChild(option);
-                }
-            }
-            formItemCont.appendChild(label);
-            formItemCont.appendChild(select);
-
-        } else{
-
-            const input = document.createElement('input');
-            input.classList.add('mb-2')
-            input.setAttribute('id', `is-${inputName[index]}`);
-            input.setAttribute('type', inputType[index]);
-            formItemCont.appendChild(label);
-            formItemCont.appendChild(input);
-        }
-        form.appendChild(formItemCont);         
-    }
-
-    formAppend.appendChild(form);
-}
 
   // -- Single row forms -- //
 

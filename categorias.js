@@ -1,9 +1,18 @@
+// - Layout -- //
+
+const row = document.createElement('div');
+row.classList.add('row', 'justify-content-center');
+
+// - cols - //
+const col1 = document.createElement('div');
+col1.classList.add('col');
+row.appendChild(col1);
+mainContainer.appendChild(row);
+
 // --- CARD --- //
 
-cardCreator('Categorias', mainContainer);
+cardCreator('Categorias', col1);
 const categoriasCard = document.getElementById('categorias');
-
-
     // -- Form -- //
 
 singleRowForm('categorias-form', categoriasCard, 'Agregar');
@@ -27,7 +36,7 @@ const showCategories = () => {
             col2.classList.add('col', 'col-3', 'd-flex','align-items-center');
             let span = document.createElement('span');
             span.appendChild(document.createTextNode(newCat));
-            span.classList.add('d-inline-block','bg-info', 'bg-opacity-50', 'p-1');
+            span.classList.add('d-inline-block','bg-info', 'bg-opacity-25', 'p-1', 's-tag');
             col1.appendChild(span);
             let editar = document.createElement('a');
             editar.setAttribute('href', `./editar-categoria.html?id=${cat.id}`);
