@@ -5,9 +5,14 @@ const filtrosCard = document.getElementById('filtros');
 const filtFirstRow = document.getElementById('filtros-first-row');
 const hideFilters = document.createElement('a');
 
+filtrosInputContainer = document.createElement('div');
+filtrosInputContainer.setAttribute('class', 'filtros-input-container');
+filtrosInputContainer.setAttribute('id', 'filtros-input-container');
+filtrosCard.appendChild(filtrosInputContainer);
 filtrosCard.setAttribute('id', 'filters-form');
 filtFirstRow.classList.add('justify-content-between');
 hideFilters.setAttribute('href', '#');
+hideFilters.setAttribute('id', 'hide-filters');
 hideFilters.classList.add('d-inline-block');
 hideFilters.appendChild(document.createTextNode('Ocultar filtros'));
 filtFirstRow.appendChild(hideFilters);
@@ -33,10 +38,10 @@ const categories = createFilterArray(data, 'category')
 const filtSelect = ['Más reciente', 'Menos reciente', 'Mayor monto', 'Menor monto', 'A/Z', 'Z/A'];
 
 
-createSelectField('filters-form', 'type', 'Tipo', types)
-createSelectField('filters-form', 'category', 'Categoría', categories)
-createInputField('filters-form', 'date', 'date', 'Desde', '', false)
-createSelectField('filters-form', 'orderBy','Ordenar por', filtSelect)
+createSelectField('filtros-input-container', 'type', 'Tipo', types)
+createSelectField('filtros-input-container', 'category', 'Categoría', categories)
+createInputField('filtros-input-container', 'date', 'date', 'Desde', '', false)
+createSelectField('filtros-input-container', 'orderBy','Ordenar por', filtSelect)
 
 // filter balance-table
 
@@ -82,7 +87,6 @@ function orderTable(table, orderBy){
     }
     else if (orderBy=="Mayor monto"){
         sortedTable = table.sort(function(a, b){
-            console.log(a['ammount'], b['ammount']);
             return b['amount'] - a['amount'];
         });
     }
@@ -119,22 +123,18 @@ form.addEventListener('change', function(e){
     replaceData(transactionsResult, 'transactions');
 });
 
-// hide filters
-hideFilters.addEventListener('click', function(){
-    const filters = document.getElementById('filters-form');
-    const filtersFirstRow = document.getElementById('filtros-first-row');
-    const filtersSecondRow = document.getElementById('filtros-second-row');
-    const hideFilters = document.getElementById('hide-filters');
+// Hide filters
 
-    if (filters.classList.contains('d-none')){
-        filters.classList.remove('d-none');
-        filtersFirstRow.classList.remove('d-none');
-        filtersSecondRow.classList.remove('d-none');
+hideFilters.addEventListener('click', function(e){
+    e.preventDefault();
+    let filtrosInputContainer = document.getElementById('filtros-input-container');
+    if (filtrosInputContainer.style.display == 'none'){
+        filtrosInputContainer.style.display = 'block';
         hideFilters.innerHTML = 'Ocultar filtros';
-    } else {
-        filters.classList.add('d-none');
-        filtersFirstRow.classList.add('d-none');
-        filtersSecondRow.classList.add('d-none');
+    }
+    else{
+        filtrosInputContainer.style.display = 'none';
         hideFilters.innerHTML = 'Mostrar filtros';
     }
 });
+
