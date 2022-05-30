@@ -10,6 +10,9 @@ const reportesCard = document.getElementById('reportes');
 const cont = document.createElement('div');
 reportesCard.appendChild(cont);
 
+const lStore = JSON.parse(localStorage.getItem('ahorradas-data'));
+const transactions = lStore.operations;
+
 // - Sections - //
 
 
@@ -203,7 +206,6 @@ ths.forEach((th)=>{
 })
 
 const totalCatTbody = document.createElement('tbody');
-const lStore = JSON.parse(localStorage.getItem('ahorradas-data'));
 const lStoreCat = lStore.categories;
 
 
