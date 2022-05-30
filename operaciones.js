@@ -1,5 +1,9 @@
-//--- Card Operaciones ---//
+// AhorrADAs script
+// Language: Javascript 
+// Authors: Vanessa Neira and Alejandra Trifilio
+// Date 05-23-2022
 
+//--- Card Operaciones ---//
 
 cardCreator('Operaciones', col2);
 const operacionesCard = document.getElementById('operaciones');

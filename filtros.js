@@ -1,3 +1,8 @@
+// AhorrADAs script
+// Language: Javascript 
+// Authors: Vanessa Neira and Alejandra Trifilio
+// Date 05-23-2022
+
 //--- Card Filtros ---//
 
 cardCreator('Filtros', col1);
@@ -82,7 +87,6 @@ function orderTable(table, orderBy){
     }
     else if (orderBy=="Mayor monto"){
         sortedTable = table.sort(function(a, b){
-            console.log(a['ammount'], b['ammount']);
             return b['amount'] - a['amount'];
         });
     }

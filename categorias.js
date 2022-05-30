@@ -1,3 +1,8 @@
+// AhorrADAs script
+// Language: Javascript 
+// Authors: Vanessa Neira and Alejandra Trifilio
+// Date 05-23-2022
+
 // - Layout -- //
 
 const row = document.createElement('div');

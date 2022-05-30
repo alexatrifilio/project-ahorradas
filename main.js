@@ -1,3 +1,8 @@
+// AhorrADAs script
+// Language: Javascript 
+// Authors: Vanessa Neira and Alejandra Trifilio
+// Date 05-23-2022
+
 const body = document.body
 
 
@@ -44,9 +49,6 @@ togglerIcon.appendChild(document.createTextNode('menu'));
 toggler.appendChild(togglerIcon);
 contFluid.appendChild(toggler);
 
-// toggler.addEventListener('click',(e)=>{
-//     listContainer.classList.toggle("collapse")
-// })
 
      // ** Header Buttons ** //
 

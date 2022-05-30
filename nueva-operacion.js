@@ -1,3 +1,8 @@
+// AhorrADAs script
+// Language: Javascript 
+// Authors: Vanessa Neira and Alejandra Trifilio
+// Date 05-23-2022
+
 // --- CARD --- //
 
 cardCreator('Nueva-operacion', mainContainer);
@@ -70,21 +75,9 @@ function saveOperation(e){
         ...transactionsStorage,
         operations: transactions
     }));
-    console.log(transactionsStorage);
 }
 
-// Add an event listener to the submit button to save the info in an array in the local storage
 
 submitButton.addEventListener('click', saveOperation);
-
-// Create a function to show the info in the table
-
-
-
-    // -- Form fields -- //
-
-
-
-    // -- Description -- //
 
 

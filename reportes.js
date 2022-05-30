@@ -1,3 +1,8 @@
+// AhorrADAs script
+// Language: Javascript 
+// Authors: Vanessa Neira and Alejandra Trifilio
+// Date 05-23-2022
+
 // --- CARD --- //
 
 cardCreator('Reportes', mainContainer);
@@ -21,9 +26,33 @@ const reportsSections = (sections) => {
     })
 }
 
+// - Card with no reports - //
+
+const noReportsImage = () =>{
+    const opImg = document.createElement('img');
+    const opImgCont = document.createElement('div');
+    opImgCont.classList.add('d-flex', 'align-items-center', 'flex-column');
+    opImg.setAttribute('src', './assets/reportsimg.png');
+    opImg.classList.add('op-img');
+    const opSubtitle = document.createElement('h3');
+    opSubtitle.appendChild(document.createTextNode('Operaciones insuficientes'));
+    const opParagraph = document.createElement('p');
+    opParagraph.appendChild(document.createTextNode('Prueba agregando más operaciones.'))
+    opImgCont.appendChild(opImg);
+    opImgCont.appendChild(opSubtitle);
+    opImgCont.appendChild(opParagraph);
+    reportesCard.appendChild(opImgCont);
+}  
+
+
 const sections = ['Resumen', 'Totales por categorías', 'Totales por mes'];
 
+if (transactions.length === 0){
+    noReportsImage();
+}else{
+
 reportsSections(sections);
+}
 
 // - operations - //
 
@@ -154,7 +183,7 @@ const rowCreator = (elem, obj, elemClass, type) => {
 rowCreator('Categoría con mayor ganancia', maxIncome(), 'income', 'cat');
 rowCreator('Categoría con mayor gasto', maxExpense(), 'expense', 'cat');
 rowCreator('Categoría con mayor balance', bestBalance(), 'balance','cat');
-//las otras row las creo más abajo en la sección de totales por mes.
+
 
 
 // - Totales por categoría - //
