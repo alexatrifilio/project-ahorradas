@@ -1,3 +1,8 @@
+// AhorrADAs script
+// Language: Javascript 
+// Authors: Vanessa Neira and Alejandra Trifilio
+// Date 05-23-2022
+
 // --- CARD --- //
 
 cardCreator('Nueva-operacion', mainContainer);
@@ -5,7 +10,7 @@ const nuevaOpCard = document.getElementById('nueva-operacion');
 const container = document.createElement('div');
 const nuevaOpForm = document.createElement('form');
 
-container.classList.add('col-8')
+container.classList.add('col')
 nuevaOpForm.setAttribute('id', 'nueva-operacion-form');
 nuevaOpForm.setAttribute('class', 'form-group');
 container.appendChild(nuevaOpForm);
@@ -38,12 +43,19 @@ createInputField('nueva-operacion-form', 'date', 'date', 'Fecha', '', true);
 
 
 // Create a button to submit the form and save the info in an array in the local storage
-
+const bttnCont = document.createElement('div');
+bttnCont.classList.add('d-flex','justify-content-end')
+const cancelBttn = document.createElement('a');
+cancelBttn.setAttribute('href', './index.html')
+cancelBttn.appendChild(document.createTextNode('Cancelar'));
+cancelBttn.classList.add('btn', 'btn-outline-secondary', 'me-2');
 const submitButton = document.createElement('button');
 submitButton.setAttribute('type', 'submit');
-submitButton.setAttribute('class', 'btn btn-primary');
+submitButton.setAttribute('class', 'btn btn-info text-white');
 submitButton.appendChild(document.createTextNode('Guardar'));
-nuevaOpForm.appendChild(submitButton);
+bttnCont.appendChild(cancelBttn);
+bttnCont.appendChild(submitButton);
+nuevaOpForm.appendChild(bttnCont);
 
 
 // Create a function to save the info in an array in the local storage
@@ -70,21 +82,9 @@ function saveOperation(e){
         ...transactionsStorage,
         operations: transactions
     }));
-    console.log(transactionsStorage);
 }
 
-// Add an event listener to the submit button to save the info in an array in the local storage
 
 submitButton.addEventListener('click', saveOperation);
-
-// Create a function to show the info in the table
-
-
-
-    // -- Form fields -- //
-
-
-
-    // -- Description -- //
 
 
