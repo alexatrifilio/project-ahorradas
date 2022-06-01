@@ -9,6 +9,20 @@ cardCreator('Editar-categoria', mainContainer);
 const editCatCard = document.getElementById('editar-categoria');
 singleRowForm('editar-cat-form', editCatCard, 'Editar');
 const editCatForm = document.getElementById('editar-cat-form');
+const bttnCont = document.createElement('div');
+bttnCont.classList.add('d-flex','justify-content-end', 'my-3', 'col-10')
+const cancelBttn = document.createElement('a');
+cancelBttn.setAttribute('href', './categorias.html')
+cancelBttn.appendChild(document.createTextNode('Cancelar'));
+cancelBttn.classList.add('btn', 'btn-outline-secondary', 'me-2');
+const bttn = editCatForm.querySelector('button');
+bttnCont.appendChild(cancelBttn);
+bttnCont.appendChild(bttn);
+editCatForm.appendChild(bttnCont)
+
+
+
+
 const params = new URLSearchParams(window.location.search);
 
 
