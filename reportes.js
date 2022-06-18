@@ -50,7 +50,7 @@ const noReportsImage = () =>{
 
 const sections = ['Resumen', 'Totales por categorías', 'Totales por mes'];
 
-if (transactions.length === 0){
+if (transactions.length < 2){
     noReportsImage();
 }else{
 
